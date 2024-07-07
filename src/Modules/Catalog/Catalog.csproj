@@ -3,7 +3,14 @@
     <PropertyGroup>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>Modular.Ecommerce</RootNamespace>
+        <RootNamespace>Modular.Ecommerce.Catalog</RootNamespace>
     </PropertyGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Core\" />
+      <Folder Include="Infrastructure\" />
+    </ItemGroup>
 
 </Project>
