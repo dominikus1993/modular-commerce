@@ -1,5 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <Folder Include="UseCases\" />
-  </ItemGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk" >
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Modular.Ecommerce.Core</RootNamespace>
+    </PropertyGroup>
 </Project>
