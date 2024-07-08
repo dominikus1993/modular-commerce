@@ -10,11 +10,10 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Api\Requests\" />
-      <Folder Include="Api\Responses\" />
-      <Folder Include="Core\" />
       <Folder Include="Infrastructure\" />
     </ItemGroup>
     <ItemGroup>
+      <PackageReference Include="FluentValidation" />
       <PackageReference Include="OpenSearch.Client" />
       <PackageReference Include="OpenSearch.Net" />
     </ItemGroup>

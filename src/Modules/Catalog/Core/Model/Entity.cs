@@ -17,7 +17,7 @@ public sealed record Tags(IReadOnlyCollection<Tag> Value) : IEnumerable<Tag>
     {
         if (value is {Length: 0})
         {
-            return Tags.Empty;
+            return Empty;
         }
 
         var tags = new Tag[value.Length];

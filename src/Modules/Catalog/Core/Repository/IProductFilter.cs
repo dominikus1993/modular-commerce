@@ -16,19 +16,13 @@ public sealed class Filter
     public int Page
     {
         get => _page;
-        init
-        {
-            _page = value < 1 ? 1 : value;
-        }
+        init => _page = value < 1 ? 1 : value;
     }
 
     public int PageSize
     {
         get => _pageSize;
-        init
-        {
-            _pageSize = value <= 0 ? 12 : value;
-        }
+        init => _pageSize = value <= 0 ? 12 : value;
     }
 
     public string? Query { get; init; }
@@ -48,7 +42,7 @@ public sealed record TagFilterMetaData(string Tag, long Count);
 
 public sealed record TagsFiltersMetaData(IReadOnlyCollection<TagFilterMetaData> Filters)
 {
-    internal static readonly TagsFiltersMetaData Empty = new TagsFiltersMetaData(Array.Empty<TagFilterMetaData>());
+    internal static readonly TagsFiltersMetaData Empty = new TagsFiltersMetaData([]);
 }
 
 public sealed record QueryResultMetadata(TagsFiltersMetaData TagFiltersMetaData, PricesMetaData Prices)
