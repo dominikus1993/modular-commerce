@@ -23,7 +23,7 @@ public static class Endpoints
         return app;
     }
 
-    private static async Task<Results<Ok<ProductDto>, NotFound>> GetProductById(Guid id, [FromServices]GetProductByIdUseCase useCase, CancellationToken cancellationToken)
+    private static async Task<Results<Ok<ProductDetailsDto>, NotFound>> GetProductById(Guid id, [FromServices]GetProductByIdUseCase useCase, CancellationToken cancellationToken)
     {
         var result = await useCase.Execute(new GetProductById(ProductId.From(id)), cancellationToken);
         if (result is null)

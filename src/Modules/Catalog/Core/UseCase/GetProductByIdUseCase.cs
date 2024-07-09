@@ -5,10 +5,10 @@ namespace Modular.Ecommerce.Catalog.Core.UseCase;
 
 public sealed class GetProductByIdUseCase
 {
-    public Task<ProductDto?> Execute(GetProductById request, CancellationToken cancellationToken = default)
+    public Task<ProductDetailsDto?> Execute(GetProductById request, CancellationToken cancellationToken = default)
     {
         // Implementation
         
-        return Task.FromResult<ProductDto?>(null);
+        return Task.FromResult<ProductDetailsDto?>(null);
     }
 }
