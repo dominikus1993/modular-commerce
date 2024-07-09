@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Modular.Ecommerce.Catalog.Api.Responses;
+using Modular.Ecommerce.Catalog.Core.Dto;
+using Modular.Ecommerce.Catalog.Core.Model;
+using Modular.Ecommerce.Catalog.Core.UseCase;
 using Modular.Ecommerce.Catalog.Core.UseCase.Requests;
 
 namespace Modular.Ecommerce.Catalog.Api;
@@ -15,10 +18,22 @@ public static class Endpoints
         var builder = app.MapGroup(path);
         builder.MapGet("/", SearchProducts)
             .WithName("GetCatalog");
-
+        builder.MapGet("/{id:guid}", GetProductById)
+            .WithName("GetProductById");
         return app;
     }
-    
+
+    private static async Task<Results<Ok<ProductDto>, NotFound>> GetProductById(Guid id, [FromServices]GetProductByIdUseCase useCase, CancellationToken cancellationToken)
+    {
+        var result = await useCase.Execute(new GetProductById(ProductId.From(id)), cancellationToken);
+        if (result is null)
+        {
+            return TypedResults.NotFound();
+        }
+
+        return TypedResults.Ok(result);
+    }
+
     private static async Task<Results<Ok<PagedProductsResult>, NoContent, BadRequest<ProblemDetails>>> SearchProducts([AsParameters]SearchProductsRequest request, [FromServices]IValidator<SearchProductsRequest> validator, CancellationToken cancellationToken)
     {
 
