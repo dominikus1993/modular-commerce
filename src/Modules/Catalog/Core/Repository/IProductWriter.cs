@@ -10,5 +10,5 @@ public interface IProductsWriter
     
     Task<Result<Unit>> AddProducts(IEnumerable<Product> products, CancellationToken cancellationToken = default);
 
-    Task RemoveAllProducts(CancellationToken cancellationToken = default);
+    Task<Result<Unit>> RemoveAllProducts(CancellationToken cancellationToken = default);
 }
