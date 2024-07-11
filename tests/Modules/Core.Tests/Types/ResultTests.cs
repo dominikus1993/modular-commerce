@@ -29,6 +29,30 @@ public sealed class ResultTests
     
     [Theory]
     [AutoData]
+    public void TestTryGetValueWhenResultIsOk(string data)
+    {
+        var result = Result.Ok(data);
+        
+        var resultCase = result.TryGetOk(out var value);
+        Assert.True(resultCase);
+        Assert.NotNull(value);
+        Assert.Equal(data, value);
+    }
+    
+    [Theory]
+    [AutoData]
+    public void TestTryGetValueWhenResultIsError(Exception data)
+    {
+        var result = Result.Failure<string>(data);
+        
+        var resultCase = result.TryGetOk(out var value);
+        Assert.False(resultCase);
+        Assert.Null(value);
+    }
+
+    
+    [Theory]
+    [AutoData]
     public void TestCaseWhenResultIsError(Exception exception)
     {
         var result = Result.Failure<string>(exception);

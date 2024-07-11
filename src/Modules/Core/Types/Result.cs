@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Modular.Ecommerce.Core.Exceptions;
 
 namespace Modular.Ecommerce.Core.Types;
@@ -24,6 +25,18 @@ public static class Result
         }
         
         return Failure<B>(res.ErrorValue);
+    }
+
+    public static bool TryGetOk<T>(this Result<T> result, [NotNullWhen(true)] out T? value)
+    {
+        if (result.IsSuccess)
+        {
+            value = result.Value!;
+            return true;
+        }
+
+        value = default;
+        return false;
     }
 }
 
