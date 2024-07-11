@@ -6,11 +6,15 @@
         <RootNamespace>Modular.Ecommerce.Catalog</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>Catalog.Tests</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+    <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Api\Requests\" />
-      <Folder Include="Infrastructure\" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="FluentValidation" />

@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{23DF82CE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{6968D8F0-E0E0-43E3-8A82-87A53D6CABC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog", "tests\Modules\Catalog\Catalog.csproj", "{20D93E9F-9ECA-426B-8A45-A3EECB8E130A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Tests", "tests\Modules\Catalog.Tests\Catalog.Tests.csproj", "{20D93E9F-9ECA-426B-8A45-A3EECB8E130A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog", "src\Modules\Catalog\Catalog.csproj", "{B307EAF7-8FD9-4974-8451-A36676A27D78}"
 EndProject

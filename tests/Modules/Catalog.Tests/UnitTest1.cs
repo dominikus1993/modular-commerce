@@ -1,4 +1,4 @@
-namespace Catalog;
+namespace Catalog.Tests;
 
 public class UnitTest1
 {
