@@ -1,4 +1,5 @@
 using Modular.Ecommerce.Catalog.Infrastructure.Model;
+using Modular.Ecommerce.Catalog.Infrastructure.OpenSearch;
 using OpenSearch.Client;
 using OpenSearch.Net;
 
@@ -11,14 +12,7 @@ internal static class OpenSearchProductIndex
     public const string TagsKeyword = "tags_keyword";
 }
 
-public sealed class OpenSearchConfiguration
-{
-    public Uri Url { get; set; }
-    public string UserName { get; set; }
-    public string Password { get; set; }
-}
-
-public static class OpenSearchInstaller
+internal static class OpenSearchInstaller
 {
     internal const string ProductsAnalyzer = "products_analyzer";
     internal const string ProductsQueryAnalyzer = "products_query_analyzer";
@@ -138,7 +132,7 @@ public static class OpenSearchInstaller
         }
     }
 
-    public static IOpenSearchClient Setup(OpenSearchConfiguration configuration)
+    internal static IOpenSearchClient Setup(OpenSearchConnectionConfiguration configuration)
     {
         var settings = new ConnectionSettings(configuration.Url)
             .ServerCertificateValidationCallback(CertificateValidations.AllowAll)
