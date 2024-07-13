@@ -146,6 +146,8 @@ internal static class OpenSearchInstaller
             settings.BasicAuthentication(configuration.UserName, configuration.Password);
         }
 
+        settings.ServerCertificateValidationCallback((_, _, _, _) => true);
+
         return new OpenSearchClient(settings);
     }
 }

@@ -23,6 +23,7 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
+await app.InitializeCatalog();
 app.MapCatalog();
 app.MapGet("/weatherforecast", () =>
 {
@@ -39,7 +40,7 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 
-app.Run();
+await app.RunAsync();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
