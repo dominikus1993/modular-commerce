@@ -2,6 +2,7 @@ using Catalog.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Modular.Ecommerce.Catalog.Core.Model;
 using Modular.Ecommerce.Catalog.Core.Repository;
 using Modular.Ecommerce.Catalog.Core.UseCase;
 using Modular.Ecommerce.Catalog.Infrastructure.OpenSearch;
@@ -32,5 +33,21 @@ public static class Setup
         using var scope = app.Services.CreateScope();
         var client = scope.ServiceProvider.GetRequiredService<IOpenSearchClient>();
         await OpenSearchInstaller.CreateIndexIfNotExists(client);
+        await app.InitData();
+    }
+
+
+    private static async Task InitData(this WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+        var writer = scope.ServiceProvider.GetRequiredService<IProductsWriter>();
+        var products = GenerateProducts();
+        await writer.AddProducts(products);
+    }
+
+    private static IEnumerable<Product> GenerateProducts()
+    {
+        yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce218")), new ProductName("nivea"), new ProductDescription("nivea cream"),
+            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), [new Tag("cream"), new Tag("face")]);
     }
 }
