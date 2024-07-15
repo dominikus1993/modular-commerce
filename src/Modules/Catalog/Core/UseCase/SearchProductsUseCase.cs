@@ -7,10 +7,31 @@ namespace Modular.Ecommerce.Catalog.Core.UseCase;
 
 public sealed class SearchProductsUseCase
 {
-    public Task<PagedResult<ProductDto>> SearchProducts(SearchProducts request, CancellationToken cancellationToken = default)
+    private readonly IProductFilter _productFilter;
+
+    public SearchProductsUseCase(IProductFilter productFilter)
     {
-        // Implementation
-        
-        return Task.FromResult(PagedResult<ProductDto>.Empty);
+        _productFilter = productFilter;
+    }
+
+    public async Task<PagedResult<ProductDto>> SearchProducts(SearchProducts request, CancellationToken cancellationToken = default)
+    {
+        var res = await _productFilter.FilterProducts(
+            new Filter()
+            {
+                PageSize = request.PageSize,
+                Page = request.Page,
+                Query = request.Query,
+                PriceFrom = request.PriceFrom,
+                PriceTo = request.PriceTo
+            }, cancellationToken);
+
+        if (res.IsEmpty)
+        {
+            return PagedResult<ProductDto>.Empty;
+        }
+
+        var products = res.Data.Select(p => new ProductDto(p));
+        return new PagedResult<ProductDto>(products, res.Metadata, res.Count, res.Total);
     }
 }
