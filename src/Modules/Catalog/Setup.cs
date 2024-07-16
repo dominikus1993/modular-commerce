@@ -49,5 +49,10 @@ public static class Setup
     {
         yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce218")), new ProductName("nivea"), new ProductDescription("nivea cream"),
             new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), [new Tag("cream"), new Tag("face")]);
+        yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce219")), new ProductName("dove"), new ProductDescription("dove soap"), new ProductPrice(new Price(5m), new Price(2m)),
+            new AvailableQuantity(20), [new Tag("soap"), new Tag("body")]);
+        yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce220")), new ProductName("colgate"), new ProductDescription("colgate toothpaste"), new ProductPrice(new Price(3m), new Price(1m)), new AvailableQuantity(30),
+            [new Tag("toothpaste"), new Tag("teeth")]);
+        
     }
 }
