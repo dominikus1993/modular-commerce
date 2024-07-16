@@ -38,7 +38,11 @@ public sealed record PricesMetaData(decimal MinPrice, decimal MaxPrice)
 {
     internal static readonly PricesMetaData Empty = new PricesMetaData(0, 0);
 }
-public sealed record TagFilterMetaData(string Tag, long Count);
+
+public sealed record TagFilterMetaData(string Tag, long Count)
+{
+    public static TagFilterMetaData Zero(string tag) => new(tag, 0);
+}
 
 public sealed record TagsFiltersMetaData(IReadOnlyCollection<TagFilterMetaData> Filters)
 {

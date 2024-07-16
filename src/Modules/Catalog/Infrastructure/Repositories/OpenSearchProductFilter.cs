@@ -99,7 +99,7 @@ public sealed class OpenSearchProductFilter : IProductFilter
             return QueryResultMetadata.Empty;
         }
         
-        var tags = result.Aggregations.Terms("tags").Buckets.Select(x => x.DocCount.HasValue ? new TagFilterMetaData(x.Key, x.DocCount.Value) : new TagFilterMetaData(x.Key, 0));
+        var tags = result.Aggregations.Terms("tags").Buckets.Select(x => x.DocCount.HasValue ? new TagFilterMetaData(x.Key, x.DocCount.Value) : TagFilterMetaData.Zero(x.Key));
 
         var prices = PricesMetaData.Empty;
         var minPrice = result.Aggregations.Min("min_price");
