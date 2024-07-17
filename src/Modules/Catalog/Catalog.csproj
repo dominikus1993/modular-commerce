@@ -18,6 +18,7 @@
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="FluentValidation" />
+      <PackageReference Include="FluentValidation.AspNetCore" />
       <PackageReference Include="OpenSearch.Client" />
       <PackageReference Include="OpenSearch.Net" />
     </ItemGroup>

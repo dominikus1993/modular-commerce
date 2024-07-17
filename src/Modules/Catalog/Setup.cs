@@ -1,7 +1,10 @@
 using Catalog.Infrastructure.Extensions;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Modular.Ecommerce.Catalog.Api.Responses;
 using Modular.Ecommerce.Catalog.Core.Model;
 using Modular.Ecommerce.Catalog.Core.Repository;
 using Modular.Ecommerce.Catalog.Core.UseCase;
@@ -25,6 +28,8 @@ public static class Setup
         builder.Services.AddTransient<IProductFilter, OpenSearchProductFilter>();
         builder.Services.AddTransient<SearchProductsUseCase>();
         builder.Services.AddTransient<GetProductByIdUseCase>();
+        builder.Services.AddFluentValidationClientsideAdapters();
+        builder.Services.AddScoped<IValidator<SearchProductsRequest>, SearchProductsRequestValidator>();
         return builder;
     }
 
