@@ -64,6 +64,6 @@ public static class Endpoints
             return TypedResults.NoContent();
         }
 
-        return TypedResults.Ok(new PagedProductsResult(result.Data, result.Count, result.Total));
+        return TypedResults.Ok(new PagedProductsResult(result.Data, new QueryResultMetadataDto(result.Metadata) ,result.Count, result.Total));
     }
 }

@@ -1,5 +1,6 @@
 using FluentValidation;
 using Modular.Ecommerce.Catalog.Core.Dto;
+using Modular.Ecommerce.Catalog.Core.Repository;
 using Modular.Ecommerce.Catalog.Core.UseCase;
 
 namespace Modular.Ecommerce.Catalog.Api.Responses;
@@ -17,6 +18,7 @@ public sealed class SearchProductsRequestValidator : AbstractValidator<SearchPro
     }
 }
 
+
 public sealed class SearchProductsRequest
 {
 
@@ -33,4 +35,45 @@ public sealed class SearchProductsRequest
     }
 }
 
-public sealed record PagedProductsResult(IEnumerable<ProductDto> Products, uint Count, uint Total);
+public sealed record PricesMetaDataDto(decimal MinPrice, decimal MaxPrice)
+{
+    public PricesMetaDataDto(PricesMetaData metaData) : this(metaData.MinPrice, metaData.MaxPrice)
+    {
+        
+    }
+}
+
+public sealed record TagFilterMetaDataDto(string Tag, long Count)
+{
+    public TagFilterMetaDataDto(TagFilterMetaData metaData) : this(metaData.Tag, metaData.Count)
+    {
+        
+    }
+}
+
+public sealed class TagsFiltersMetaDataDto
+{
+    public IReadOnlyCollection<TagFilterMetaDataDto> Filters { get; }
+
+    public TagsFiltersMetaDataDto(TagsFiltersMetaData metaData) 
+    {
+        if (metaData.Filters is null or {Count: 0})
+        {
+            Filters = [];
+        }
+        else
+        {
+            Filters = metaData.Filters.Select(x => new TagFilterMetaDataDto(x)).ToArray();
+        }
+    }
+}
+
+public sealed record QueryResultMetadataDto(TagsFiltersMetaDataDto TagFiltersMetaData, PricesMetaDataDto Prices)
+{
+    public QueryResultMetadataDto(QueryResultMetadata metadata) : this(new TagsFiltersMetaDataDto(metadata.TagFiltersMetaData), new PricesMetaDataDto(metadata.Prices))
+    {
+        
+    }
+}
+
+public sealed record PagedProductsResult(IEnumerable<ProductDto> Products, QueryResultMetadataDto Metadata, uint Count, uint Total);
