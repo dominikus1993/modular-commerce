@@ -53,7 +53,7 @@ public abstract class Result<T>
     public abstract Result<TRes> Map<TRes>(Func<T, TRes> map);
     public abstract TRes Match<TRes>(Func<T, TRes> ok, Func<Exception, TRes> error);
     public abstract void Match(Action<T> ok, Action<Exception> error);
-    public abstract Task<TRes> MatchTask<TRes>(Func<T, CancellationToken, Task<TRes>> ok, Func<Exception, CancellationToken, Task<TRes>> func, CancellationToken token = default);
+    public abstract Task<TRes> MatchTask<TRes>(Func<T, CancellationToken, Task<TRes>> ok, Func<Exception, CancellationToken, Task<TRes>> error, CancellationToken token = default);
     public abstract Task MatchTask(Func<T, CancellationToken, Task> ok, Func<Exception, CancellationToken, Task> error, CancellationToken cancellationToken = default);
     public abstract object? Case { get; }
 }

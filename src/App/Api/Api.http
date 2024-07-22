@@ -1,6 +1,12 @@
 @Api_HostAddress = http://localhost:5011
 
-GET {{Api_HostAddress}}/weatherforecast/
+
+GET {{Api_HostAddress}}/catalog/
+Accept: application/json
+
+###
+
+GET {{Api_HostAddress}}/catalog?PageSize=12
 Accept: application/json
 
 ###
