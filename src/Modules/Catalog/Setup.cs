@@ -68,6 +68,14 @@ public static class Setup
             [new Tag("chips"), new Tag("snacks")]);
         yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce225")), new ProductName("kitkat"), new ProductDescription("kitkat chocolate"), new ProductPrice(new Price(3m), new Price(1.5m)), new AvailableQuantity(80),
             [new Tag("snacks"), new Tag("chocolate")]);
-
+        yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce226")), new ProductName("dairy milk"), new ProductDescription("dairy milk chocolate"), new ProductPrice(new Price(2.99m)), new AvailableQuantity(90),
+            [new Tag("snacks"), new Tag("chocolate"), new Tag("drink")]);
+        yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce227")), new ProductName("sprite"), new ProductDescription("sprite drink"), new ProductPrice(new Price(1.21m)), new AvailableQuantity(100),
+            [new Tag("drink")]);
+        yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce228")), new ProductName("pepsi"), new ProductDescription("pepsi cola"), new ProductPrice(new Price(1.25m)), new AvailableQuantity(100),
+            [new Tag("drink")]);
+        yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce220")), new ProductName("nivea"), new ProductDescription("nivea soap"), new ProductPrice(new Price(5m), new Price(1m)),
+            new AvailableQuantity(20), [new Tag("soap"), new Tag("body")]);
+        
     }
 }

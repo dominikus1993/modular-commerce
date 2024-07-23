@@ -55,16 +55,9 @@ public sealed class TagsFiltersMetaDataDto
 {
     public IReadOnlyCollection<TagFilterMetaDataDto> Filters { get; }
 
-    public TagsFiltersMetaDataDto(TagsFiltersMetaData metaData) 
+    public TagsFiltersMetaDataDto(TagsFiltersMetaData metaData)
     {
-        if (metaData.Filters is null or {Count: 0})
-        {
-            Filters = [];
-        }
-        else
-        {
-            Filters = metaData.Filters.Select(x => new TagFilterMetaDataDto(x)).ToArray();
-        }
+        Filters = metaData.Filters is null or {Count: 0} ? [] : metaData.Filters.Select(x => new TagFilterMetaDataDto(x)).ToArray();
     }
 }
 
