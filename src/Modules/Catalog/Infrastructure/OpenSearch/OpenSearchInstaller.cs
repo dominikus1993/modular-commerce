@@ -137,7 +137,7 @@ internal static class OpenSearchInstaller
         var settings = new ConnectionSettings(configuration.Url)
             .EnableHttpPipelining()
             .EnableHttpCompression()
-            .EnableTcpKeepAlive(TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(15))
+            .EnableTcpKeepAlive(TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(30))
             .ServerCertificateValidationCallback(CertificateValidations.AllowAll)
             .DefaultIndex(OpenSearchProductIndex.Name)
             .DefaultMappingFor<OpenSearchProduct>(m => m
@@ -148,8 +148,6 @@ internal static class OpenSearchInstaller
         {
             settings.BasicAuthentication(configuration.UserName, configuration.Password);
         }
-
-        settings.ServerCertificateValidationCallback((_, _, _, _) => true);
 
         return new OpenSearchClient(settings);
     }
