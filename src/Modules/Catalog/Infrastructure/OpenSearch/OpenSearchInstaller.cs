@@ -135,6 +135,9 @@ internal static class OpenSearchInstaller
     internal static IOpenSearchClient Setup(OpenSearchConnectionConfiguration configuration)
     {
         var settings = new ConnectionSettings(configuration.Url)
+            .EnableHttpPipelining()
+            .EnableHttpCompression()
+            .EnableTcpKeepAlive(TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(15))
             .ServerCertificateValidationCallback(CertificateValidations.AllowAll)
             .DefaultIndex(OpenSearchProductIndex.Name)
             .DefaultMappingFor<OpenSearchProduct>(m => m
