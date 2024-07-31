@@ -4,4 +4,12 @@
         <Nullable>enable</Nullable>
         <RootNamespace>Modular.Ecommerce.Core</RootNamespace>
     </PropertyGroup>
+    <ItemGroup>
+      <PackageReference Include="Serilog" />
+      <PackageReference Include="Serilog.AspNetCore" />
+      <PackageReference Include="Serilog.Enrichers.Span" />
+      <PackageReference Include="Serilog.Exceptions" />
+      <PackageReference Include="Serilog.Formatting.Elasticsearch" />
+      <PackageReference Include="Serilog.Sinks.OpenTelemetry" />
+    </ItemGroup>
 </Project>
