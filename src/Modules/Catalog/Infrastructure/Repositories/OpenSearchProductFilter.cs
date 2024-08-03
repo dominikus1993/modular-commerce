@@ -76,8 +76,8 @@ public sealed class OpenSearchProductFilter : IProductFilter
         searchRequest.Aggregations = new AggregationDictionary()
         {
             { "tags", new TermsAggregation("tags") { Field = Field(OpenSearchProductIndex.TagsKeyword), Size = 1000, } },
-            { "max_price", new MaxAggregation("max_price", Field<OpenSearchProduct>(x => x.SalePrice)) { } },
-            { "min_price", new MinAggregation("min_price", Field<OpenSearchProduct>(x => x.SalePrice)) { } },
+            { "max_price", new MaxAggregation("max_price", Field<OpenSearchProduct>(x => x.SalePrice)) },
+            { "min_price", new MinAggregation("min_price", Field<OpenSearchProduct>(x => x.SalePrice)) },
         };
 
         var result = await _openSearchClient.SearchAsync<OpenSearchProduct>(searchRequest, cancellationToken);
