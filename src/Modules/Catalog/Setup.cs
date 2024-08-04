@@ -74,7 +74,11 @@ public static class Setup
             [new Tag("drink")]);
         yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce228")), new ProductName("pepsi"), new ProductDescription("pepsi cola"), new ProductPrice(new Price(1.25m)), new AvailableQuantity(100),
             [new Tag("drink")]);
-        yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce220")), new ProductName("nivea"), new ProductDescription("nivea soap"), new ProductPrice(new Price(5m), new Price(1m)),
+        yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce230")), new ProductName("nivea"), new ProductDescription("nivea soap"), new ProductPrice(new Price(5m), new Price(1m)),
+            new AvailableQuantity(20), [new Tag("soap"), new Tag("body")]);
+        yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce231")), new ProductName("isana"), new ProductDescription("isana soap"), new ProductPrice(new Price(5m), new Price(1m)),
+            new AvailableQuantity(20), [new Tag("soap"), new Tag("body")]);
+        yield return new Product(new ProductId(new Guid("4c735c18-dcbf-4e72-b479-fa1e36dce232")), new ProductName("domol"), new ProductDescription("domol soap"), new ProductPrice(new Price(5m), new Price(1m)),
             new AvailableQuantity(20), [new Tag("soap"), new Tag("body")]);
         
     }

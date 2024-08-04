@@ -46,7 +46,7 @@ public sealed record TagFilterMetaData(string Tag, long Count)
 
 public sealed record TagsFiltersMetaData(IReadOnlyCollection<TagFilterMetaData> Filters)
 {
-    internal static readonly TagsFiltersMetaData Empty = new TagsFiltersMetaData([]);
+    internal static readonly TagsFiltersMetaData Empty = new([]);
 }
 
 public sealed record QueryResultMetadata(TagsFiltersMetaData TagFiltersMetaData, PricesMetaData Prices)
