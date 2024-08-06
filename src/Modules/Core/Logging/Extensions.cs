@@ -60,30 +60,18 @@ public static class Extensionss
         return builder;
     }
 
-    public static IHostBuilder UseLogging(this IHostBuilder hostBuilder, string? applicationName = null)
+    private static IHostBuilder UseLogging(this IHostBuilder hostBuilder, string? applicationName = null)
     {
         string? appName = applicationName ?? Assembly.GetExecutingAssembly().FullName;
         return hostBuilder.UseSerilog((context, configuration) =>
         {
-            var serilogOptions = context.Configuration.GetSection("Serilog").Get<SerilogOptions>() ??
-                                 new SerilogOptions();
-            
-            var level = serilogOptions.GetMinimumLogEventLevel();
-            var conf = configuration
-                .MinimumLevel.Is(level)
+            configuration
                 .Enrich.FromLogContext()
                 .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
                 .Enrich.WithProperty("ApplicationName", appName)
                 .Enrich.WithCustomerId()
                 .Enrich.WithSpan()
-                .Enrich.WithExceptionDetails();
-
-            foreach ((string name, string lvl) in BindOverride(serilogOptions.Override))
-            {
-                conf.MinimumLevel.Override(name, ParseLevel(lvl));
-            }
-
-            conf.WriteTo.OpenTelemetry();
+                .ReadFrom.Configuration(context.Configuration);
         });
     }
 }

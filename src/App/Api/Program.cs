@@ -1,8 +1,10 @@
 using Modular.Ecommerce.Catalog;
 using Modular.Ecommerce.Catalog.Api;
+using Modular.Ecommerce.Core.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.UseLogging("ecommerce");
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
