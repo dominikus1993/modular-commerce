@@ -2,6 +2,8 @@ using Modular.Ecommerce.Catalog.Core.Model;
 
 namespace Modular.Ecommerce.Catalog.Core.Dto;
 
+public sealed record ProductImageDto(Uri Link, string Alt);
+
 public sealed class ProductDetailsDto
 {
     public Guid ProductId { get; init; }
@@ -15,6 +17,8 @@ public sealed class ProductDetailsDto
     
     public int AvailableQuantity { get; init; }
     
+    public IReadOnlyList<ProductImageDto> Images { get; init; }
+    
     public ProductDetailsDto(Product product)
     {
         ProductId = product.Id.Value;
@@ -23,5 +27,6 @@ public sealed class ProductDetailsDto
         Price = product.Price.CurrentPrice;
         PromotionalPrice = product.Price.PromotionalPrice;
         AvailableQuantity = product.AvailableQuantity.Value;
+        Images = product.Images.Select(x => new ProductImageDto(x.Link, x.Alt)).ToArray();
     }
 }

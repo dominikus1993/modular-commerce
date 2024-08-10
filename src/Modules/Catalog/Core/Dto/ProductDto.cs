@@ -15,6 +15,8 @@ public sealed class ProductDto
     
     public int AvailableQuantity { get; init; }
     
+    public IReadOnlyList<ProductImageDto> Images { get; init; }
+    
     public ProductDto(Product product)
     {
         ProductId = product.Id.Value;
@@ -23,5 +25,6 @@ public sealed class ProductDto
         Price = product.Price.CurrentPrice;
         PromotionalPrice = product.Price.PromotionalPrice;
         AvailableQuantity = product.AvailableQuantity.Value;
+        Images = product.Images.Select(x => new ProductImageDto(x.Link, x.Alt)).ToArray();
     }
 }

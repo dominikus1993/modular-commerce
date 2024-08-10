@@ -56,11 +56,11 @@ public sealed class OpenSearchProductFilterTests(OpenSearchFixture fixture) : IA
     {
         // Arrange 
         var product1 = new Product(ProductId.New(), new ProductName("not xDDD"), new ProductDescription("nivea"),
-            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty);
+            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty, []);
         var product2 = new Product(ProductId.New(), new ProductName("Nivea xDDD"), new ProductDescription("xDDD"),
-            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty);
+            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty, []);
         var product3 = new Product(ProductId.New(), new ProductName("xDDD"), new ProductDescription("xDDD"),
-            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty);
+            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty, []);
         await _productsWriter.AddProducts(new[] { product1, product2, product3 });
         // Act
 
@@ -79,11 +79,11 @@ public sealed class OpenSearchProductFilterTests(OpenSearchFixture fixture) : IA
     {
         // Arrange 
         var product1 = new Product(ProductId.New(), new ProductName("not xDDD"), new ProductDescription("nivea"),
-            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), new Tags(new []{ new Tag(tag), new Tag(tag2)}));
+            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), new Tags(new []{ new Tag(tag), new Tag(tag2)}), []);
         var product2 = new Product(ProductId.New(), new ProductName("Nivea xDDD"), new ProductDescription("xDDD"),
-            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), new Tags(new[] { new Tag(tag2) }));
+            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), new Tags(new[] { new Tag(tag2) }), []);
         var product3 = new Product(ProductId.New(), new ProductName("xDDD"), new ProductDescription("xDDD"),
-            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty);
+            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty, []);
         await _productsWriter.AddProducts(new[] { product1, product2, product3 });
         // Act
 
@@ -103,11 +103,11 @@ public sealed class OpenSearchProductFilterTests(OpenSearchFixture fixture) : IA
     {
         // Arrange 
         var product1 = new Product(ProductId.New(), new ProductName("not xDDD"), new ProductDescription("nivea"),
-            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), tags);
+            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), tags, []);
         var product2 = new Product(ProductId.New(), new ProductName("Nivea xDDD"), new ProductDescription("xDDD"),
-            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty);
+            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty, []);
         var product3 = new Product(ProductId.New(), new ProductName("xDDD"), new ProductDescription("xDDD"),
-            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty);
+            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty, []);
         await _productsWriter.AddProducts(new[] { product1, product2, product3 });
         // Act
 
@@ -124,11 +124,11 @@ public sealed class OpenSearchProductFilterTests(OpenSearchFixture fixture) : IA
     {
         // Arrange 
         var product1 = new Product(ProductId.New(), new ProductName("not xDDD"), new ProductDescription("nivea"),
-            new ProductPrice(new Price(5m), new Price(1m)), new AvailableQuantity(10), Tags.Empty);
+            new ProductPrice(new Price(5m), new Price(1m)), new AvailableQuantity(10), Tags.Empty, []);
         var product2 = new Product(ProductId.New(), new ProductName("Nivea xDDD"), new ProductDescription("xDDD"),
-            new ProductPrice(new Price(11m)), new AvailableQuantity(10), Tags.Empty);
+            new ProductPrice(new Price(11m)), new AvailableQuantity(10), Tags.Empty, []);
         var product3 = new Product(ProductId.New(), new ProductName("xDDD"), new ProductDescription("xDDD"),
-            new ProductPrice(new Price(20m), new Price(20m)), new AvailableQuantity(10), Tags.Empty);
+            new ProductPrice(new Price(20m), new Price(20m)), new AvailableQuantity(10), Tags.Empty, []);
         await _productsWriter.AddProducts(new[] { product1, product2, product3 });
         // Act
         
@@ -148,11 +148,11 @@ public sealed class OpenSearchProductFilterTests(OpenSearchFixture fixture) : IA
     {
         // Arrange 
         var product1 = new Product(ProductId.New(), new ProductName("not xDDD"), new ProductDescription("nivea"),
-            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty);
+            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty, []);
         var product2 = new Product(ProductId.New(), new ProductName("Nivea xDDD"), new ProductDescription("xDDD"),
-            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty);
+            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty, []);
         var product3 = new Product(ProductId.New(), new ProductName("xDDD"), new ProductDescription("xDDD"),
-            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty);
+            new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty, []);
         await _productsWriter.AddProducts(new[] { product1, product2, product3 });
         // Act
         
@@ -171,11 +171,11 @@ public sealed class OpenSearchProductFilterTests(OpenSearchFixture fixture) : IA
      {
          // Arrange 
          var product1 = new Product(ProductId.New(), new ProductName("not xDDD"), new ProductDescription("nivea"),
-             new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty);
+             new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty, []);
          var product2 = new Product(ProductId.New(), new ProductName("Nivea xDDD"), new ProductDescription("xDDD"),
-             new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty);
+             new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty, []);
          var product3 = new Product(ProductId.New(), new ProductName("xDDD"), new ProductDescription("xDDD"),
-             new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty);
+             new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), Tags.Empty, []);
          await _productsWriter.AddProducts(new[] { product1, product2, product3 });
          // Act
 
@@ -194,11 +194,11 @@ public sealed class OpenSearchProductFilterTests(OpenSearchFixture fixture) : IA
      {
          // Arrange 
          var product1 = new Product(ProductId.New(), new ProductName("nivea"), new ProductDescription("nivea"),
-             new ProductPrice(new Price(10m), new Price(1m)), new AvailableQuantity(10), [new Tag("body")]);
+             new ProductPrice(new Price(10m), new Price(1m)), new AvailableQuantity(10), [new Tag("body")], []);
          var product2 = new Product(ProductId.New(), new ProductName("Nivea"), new ProductDescription("xDDD"),
-             new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), [new Tag("hair")]);
+             new ProductPrice(new Price(10m), new Price(5m)), new AvailableQuantity(10), [new Tag("hair")], []);
          var product3 = new Product(ProductId.New(), new ProductName("Nivea Men"), new ProductDescription("xDDD"),
-             new ProductPrice(new Price(10m), new Price(9m)), new AvailableQuantity(10), [new Tag("hair")]);
+             new ProductPrice(new Price(10m), new Price(9m)), new AvailableQuantity(10), [new Tag("hair")], []);
          await _productsWriter.AddProducts([ product1, product2, product3 ]);
          // Act
 
