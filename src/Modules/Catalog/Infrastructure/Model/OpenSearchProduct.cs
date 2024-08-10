@@ -3,6 +3,12 @@ using OpenSearch.Client;
 
 namespace Modular.Ecommerce.Catalog.Infrastructure.Model;
 
+public sealed class OpenSearchProductImage
+{
+    public Uri Link { get; set; }
+    public string Alt { get; set; }
+}
+
 [OpenSearchType(IdProperty = nameof(ProductId))]
 internal sealed class OpenSearchProduct
 {
@@ -19,6 +25,8 @@ internal sealed class OpenSearchProduct
     public int AvailableQuantity { get; set; }
     
     public IReadOnlyList<string>? Tags { get; set; }
+
+    public IReadOnlyList<OpenSearchProductImage> Images { get; set; } = [];
     
     public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.UtcNow;
 
@@ -37,6 +45,11 @@ internal sealed class OpenSearchProduct
         PromotionalPrice = product.Price.PromotionalPrice;
         Tags = product.Tags?.Select(x => x.Name).ToArray();
         SalePrice = PromotionalPrice ?? Price;
+        Images = product.Images.Select(x => new OpenSearchProductImage
+        {
+            Alt = x.Alt,
+            Link = x.Link
+        }).ToArray();
     }
 
     public Product ToProduct()
@@ -44,6 +57,6 @@ internal sealed class OpenSearchProduct
         var tags = Tags?.Select(tag => new Tag(tag)) ?? [];
         Guid id = Guid.Parse(ProductId.ToString());
         return new Product(id, new ProductName(Name), new ProductDescription(Description),
-            new ProductPrice(Price, PromotionalPrice), new AvailableQuantity(AvailableQuantity), [..tags]);
+            new ProductPrice(Price, PromotionalPrice), new AvailableQuantity(AvailableQuantity), [..tags], [..Images.Select(x => new ProductImage(x.Link, x.Alt))]);
     }
 }

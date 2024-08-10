@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 namespace Modular.Ecommerce.Catalog.Core.Model;
 
 public readonly record struct ProductName(string Name);
-
+public sealed record ProductImage(Uri Link, string Alt);
 public sealed record Tag(string Name);
 
 [CollectionBuilder(typeof(Tags), "Create")]
@@ -67,4 +67,4 @@ public sealed record ProductPrice(Price CurrentPrice, Price? PromotionalPrice = 
 public readonly record struct AvailableQuantity(int Value);
 
 public sealed record Product(ProductId Id, ProductName ProductName, ProductDescription ProductDescription, ProductPrice Price,
-    AvailableQuantity AvailableQuantity, Tags? Tags);
+    AvailableQuantity AvailableQuantity, Tags? Tags, IReadOnlyCollection<ProductImage> Images);
