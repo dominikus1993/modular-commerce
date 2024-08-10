@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.Features;
 using Modular.Ecommerce.Catalog;
 using Modular.Ecommerce.Catalog.Api;
 using Modular.Ecommerce.Core.Logging;
@@ -24,7 +25,10 @@ app.UseCors(policyBuilder =>
 {
     policyBuilder.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader();
 });
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions()
+{
+    HttpsCompression = HttpsCompressionMode.Compress,
+});
 await app.InitializeCatalog();
 app.MapCatalog();
 
