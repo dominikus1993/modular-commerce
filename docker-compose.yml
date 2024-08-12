@@ -35,7 +35,16 @@ services:
       OPENSEARCH_HOSTS: '["https://opensearch-node1:9200"]' # Define the OpenSearch nodes that OpenSearch Dashboards will query
     networks:
       - opensearch-net
-
+  
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - opensearch-net
+      - 
 volumes:
   opensearch-data1:
 

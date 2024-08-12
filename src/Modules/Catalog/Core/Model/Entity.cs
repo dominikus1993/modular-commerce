@@ -11,7 +11,7 @@ public sealed record Tag(string Name);
 public sealed record Tags(IReadOnlyCollection<Tag> Value) : IEnumerable<Tag>
 {
     public static readonly Tags Empty = new Tags(Array.Empty<Tag>());
-    public bool HasElements() => Value is { Count: > 0 };
+    public bool HasElements => Value is { Count: > 0 };
     
     public static Tags Create(ReadOnlySpan<Tag> value)
     {
