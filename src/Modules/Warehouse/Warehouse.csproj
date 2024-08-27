@@ -9,6 +9,7 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Api\" />
+      <Folder Include="Core\Repository\" />
     </ItemGroup>
 
 </Project>
