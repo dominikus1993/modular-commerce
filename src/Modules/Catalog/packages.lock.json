@@ -4,9 +4,9 @@
     "net8.0": {
       "FluentValidation": {
         "type": "Direct",
-        "requested": "[11.9.2, )",
-        "resolved": "11.9.2",
-        "contentHash": "XeHp9LvFvu1fsQ/NvDCymV02GOCB1nz7ZUhfpI3uMhCcHTkV1K5bMkv+Nc/kuNYyAsX5+5bcmUanIEMd5QN+Eg=="
+        "requested": "[11.10.0, )",
+        "resolved": "11.10.0",
+        "contentHash": "qsJGSJDdZ8qiG+lVJ70PZfJHcEdq8UQZ/tZDXoj78/iHKG6lVKtMJsD11zyyv/IPc7rwqGqnFoFLTNzpo3IPYg=="
       },
       "FluentValidation.AspNetCore": {
         "type": "Direct",
@@ -20,18 +20,18 @@
       },
       "OpenSearch.Client": {
         "type": "Direct",
-        "requested": "[1.7.1, )",
-        "resolved": "1.7.1",
-        "contentHash": "9eur6uFc3SUuONtkefivo/UZ5xCq8aAEDL7U2Zt73NS4UxuCkP2R+nbLOKuENLGaHC2fV+miA+aE7uPXaDKD4w==",
+        "requested": "[1.8.0, )",
+        "resolved": "1.8.0",
+        "contentHash": "OoVHys2QZpnstwA9WliaFjpV/LEs5EbKPRjy8ww8cRxJMNzHpHTwUJBJ/N8qHhP/riiTHAtNUGLvhcoBXJkyTw==",
         "dependencies": {
-          "OpenSearch.Net": "1.7.1"
+          "OpenSearch.Net": "1.8.0"
         }
       },
       "OpenSearch.Net": {
         "type": "Direct",
-        "requested": "[1.7.1, )",
-        "resolved": "1.7.1",
-        "contentHash": "paL7K/gXfIvHGzcT2i+lNYkM6k04cySQDz8Zh/+cPG2EG7r3yJNJ0rREM/bBIlt6gafocBko+T9YDlDRj3hiWg==",
+        "requested": "[1.8.0, )",
+        "resolved": "1.8.0",
+        "contentHash": "X4n+b3Eq9u7i5qXqcSPMJRpoH7qljwCIAv2t6h46R4JuObzx28VeFG0cGoy+y4azqScfKp2t67JeuHB1Mo+4Uw==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -269,7 +269,7 @@
           "Serilog.Exceptions": "[8.4.0, )",
           "Serilog.Formatting.Elasticsearch": "[10.0.0, )",
           "Serilog.Settings.Configuration": "[8.0.2, )",
-          "Serilog.Sinks.OpenTelemetry": "[4.0.0, )"
+          "Serilog.Sinks.OpenTelemetry": "[4.1.0, )"
         }
       },
       "Serilog": {
@@ -336,9 +336,9 @@
       },
       "Serilog.Sinks.OpenTelemetry": {
         "type": "CentralTransitive",
-        "requested": "[4.0.0, )",
-        "resolved": "4.0.0",
-        "contentHash": "M4WKDojg8a+msY5qhNGg5PYZ9ZVelcqipkP/CrfDAOvGCZ3MYj+cGXgnTanffYyIoC2onabaOtydqW6lqT/P/w==",
+        "requested": "[4.1.0, )",
+        "resolved": "4.1.0",
+        "contentHash": "zYKe2TIeWZE4sFUlbGAk94Ae46xgp20dsiw52m2KnRe34zBRQmb+GjYvcpciqMR3nskWebWODjJe2yRTDR3q8g==",
         "dependencies": {
           "Google.Protobuf": "3.26.1",
           "Grpc.Net.Client": "2.62.0",

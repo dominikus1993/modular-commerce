@@ -66,9 +66,9 @@
       },
       "Serilog.Sinks.OpenTelemetry": {
         "type": "Direct",
-        "requested": "[4.0.0, )",
-        "resolved": "4.0.0",
-        "contentHash": "M4WKDojg8a+msY5qhNGg5PYZ9ZVelcqipkP/CrfDAOvGCZ3MYj+cGXgnTanffYyIoC2onabaOtydqW6lqT/P/w==",
+        "requested": "[4.1.0, )",
+        "resolved": "4.1.0",
+        "contentHash": "zYKe2TIeWZE4sFUlbGAk94Ae46xgp20dsiw52m2KnRe34zBRQmb+GjYvcpciqMR3nskWebWODjJe2yRTDR3q8g==",
         "dependencies": {
           "Google.Protobuf": "3.26.1",
           "Grpc.Net.Client": "2.62.0",
