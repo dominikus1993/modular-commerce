@@ -5,6 +5,8 @@
         <RootNamespace>Modular.Ecommerce.Core</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
+      <PackageReference Include="NATS.Extensions.Microsoft.DependencyInjection" />
+      <PackageReference Include="NATS.Net" />
       <PackageReference Include="Serilog" />
       <PackageReference Include="Serilog.AspNetCore" />
       <PackageReference Include="Serilog.Enrichers.Span" />
