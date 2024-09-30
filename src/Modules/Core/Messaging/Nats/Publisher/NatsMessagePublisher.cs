@@ -16,7 +16,7 @@ internal sealed class NatsMessagePublisher<T> : IMessagePublisher<T> where T : I
         _configuration = configuration;
     }
 
-    public async Task<Result<Unit>> PublishAsync(T message, CancellationToken cancellationToken = default)
+    public async ValueTask<Result<Unit>> PublishAsync(T message, CancellationToken cancellationToken = default)
     {
         try
         {
