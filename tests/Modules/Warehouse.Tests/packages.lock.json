@@ -630,15 +630,6 @@
           "NATS.Client.Serializers.Json": "2.4.0"
         }
       },
-      "NATS.Extensions.Microsoft.DependencyInjection": {
-        "type": "Transitive",
-        "resolved": "2.4.0",
-        "contentHash": "nGNNXf8zyzOlSU49TvUgc/ekO1tqqyhytMd6mqJZFQgZXn/R42onF3ralFZDMoMt3r994M1Pr38sWdFXgTruRQ==",
-        "dependencies": {
-          "Microsoft.Extensions.Hosting.Abstractions": "8.0.0",
-          "NATS.Net": "2.4.0"
-        }
-      },
       "NETStandard.Library": {
         "type": "Transitive",
         "resolved": "1.6.1",
@@ -694,6 +685,15 @@
         "type": "Transitive",
         "resolved": "13.0.1",
         "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
+      },
+      "RabbitMQ.Client": {
+        "type": "Transitive",
+        "resolved": "6.8.1",
+        "contentHash": "jNsmGgmCNw2S/NzskeN2ijtGywtH4Sk/G6jWUTD5sY9SrC27Xz6BsLIiB8hdsfjeyWCa4j4GvCIGkpE8wrjU1Q==",
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Threading.Channels": "7.0.0"
+        }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl": {
         "type": "Transitive",
@@ -1183,6 +1183,11 @@
           "System.CodeDom": "8.0.0"
         }
       },
+      "System.Memory": {
+        "type": "Transitive",
+        "resolved": "4.5.5",
+        "contentHash": "XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw=="
+      },
       "System.Net.Http": {
         "type": "Transitive",
         "resolved": "4.3.0",
@@ -1602,6 +1607,11 @@
           "System.Threading.Tasks": "4.3.0"
         }
       },
+      "System.Threading.Channels": {
+        "type": "Transitive",
+        "resolved": "7.0.0",
+        "contentHash": "qmeeYNROMsONF6ndEZcIQ+VxR4Q/TX/7uIVLJqtwIWL7dDWeh0l1UIqgo4wYyjG//5lUNhwkLDSFl+pAWO6oiA=="
+      },
       "System.Threading.Tasks": {
         "type": "Transitive",
         "resolved": "4.3.0",
@@ -1742,6 +1752,7 @@
         "dependencies": {
           "NATS.Extensions.Microsoft.DependencyInjection": "[2.4.0, )",
           "NATS.Net": "[2.4.0, )",
+          "RabbitMQ.Client": "[6.8.1, )",
           "Serilog": "[4.0.1, )",
           "Serilog.AspNetCore": "[8.0.2, )",
           "Serilog.Enrichers.Span": "[3.1.0, )",
@@ -1777,6 +1788,16 @@
         "contentHash": "wNHhohqP8rmsQ4UhKbd6jZMD6l+2Q/+DvRBT0Cgqeuglr13aF6sSJWicZKCIhZAUXzuhkdwtHVc95MlPlFk0dA==",
         "dependencies": {
           "Microsoft.OpenApi": "1.4.3"
+        }
+      },
+      "NATS.Extensions.Microsoft.DependencyInjection": {
+        "type": "CentralTransitive",
+        "requested": "[2.4.0, )",
+        "resolved": "2.4.0",
+        "contentHash": "nGNNXf8zyzOlSU49TvUgc/ekO1tqqyhytMd6mqJZFQgZXn/R42onF3ralFZDMoMt3r994M1Pr38sWdFXgTruRQ==",
+        "dependencies": {
+          "Microsoft.Extensions.Hosting.Abstractions": "8.0.0",
+          "NATS.Net": "2.4.0"
         }
       },
       "NATS.Net": {

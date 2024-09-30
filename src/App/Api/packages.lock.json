@@ -243,13 +243,13 @@
           "NATS.Client.Serializers.Json": "2.4.0"
         }
       },
-      "NATS.Extensions.Microsoft.DependencyInjection": {
+      "RabbitMQ.Client": {
         "type": "Transitive",
-        "resolved": "2.4.0",
-        "contentHash": "nGNNXf8zyzOlSU49TvUgc/ekO1tqqyhytMd6mqJZFQgZXn/R42onF3ralFZDMoMt3r994M1Pr38sWdFXgTruRQ==",
+        "resolved": "6.8.1",
+        "contentHash": "jNsmGgmCNw2S/NzskeN2ijtGywtH4Sk/G6jWUTD5sY9SrC27Xz6BsLIiB8hdsfjeyWCa4j4GvCIGkpE8wrjU1Q==",
         "dependencies": {
-          "Microsoft.Extensions.Hosting.Abstractions": "8.0.0",
-          "NATS.Net": "2.4.0"
+          "System.Memory": "4.5.5",
+          "System.Threading.Channels": "7.0.0"
         }
       },
       "Serilog.Extensions.Hosting": {
@@ -341,6 +341,11 @@
         "resolved": "8.0.0",
         "contentHash": "FHNOatmUq0sqJOkTx+UF/9YK1f180cnW5FVqnQMvYUN0elp6wFzbtPSiqbo1/ru8ICp43JM1i7kKkk6GsNGHlA=="
       },
+      "System.Memory": {
+        "type": "Transitive",
+        "resolved": "4.5.5",
+        "contentHash": "XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw=="
+      },
       "System.Reflection.TypeExtensions": {
         "type": "Transitive",
         "resolved": "4.7.0",
@@ -359,6 +364,11 @@
           "System.Text.Encodings.Web": "8.0.0"
         }
       },
+      "System.Threading.Channels": {
+        "type": "Transitive",
+        "resolved": "7.0.0",
+        "contentHash": "qmeeYNROMsONF6ndEZcIQ+VxR4Q/TX/7uIVLJqtwIWL7dDWeh0l1UIqgo4wYyjG//5lUNhwkLDSFl+pAWO6oiA=="
+      },
       "catalog": {
         "type": "Project",
         "dependencies": {
@@ -374,6 +384,7 @@
         "dependencies": {
           "NATS.Extensions.Microsoft.DependencyInjection": "[2.4.0, )",
           "NATS.Net": "[2.4.0, )",
+          "RabbitMQ.Client": "[6.8.1, )",
           "Serilog": "[4.0.1, )",
           "Serilog.AspNetCore": "[8.0.2, )",
           "Serilog.Enrichers.Span": "[3.1.0, )",
@@ -397,6 +408,16 @@
         "dependencies": {
           "FluentValidation": "11.5.1",
           "FluentValidation.DependencyInjectionExtensions": "11.5.1"
+        }
+      },
+      "NATS.Extensions.Microsoft.DependencyInjection": {
+        "type": "CentralTransitive",
+        "requested": "[2.4.0, )",
+        "resolved": "2.4.0",
+        "contentHash": "nGNNXf8zyzOlSU49TvUgc/ekO1tqqyhytMd6mqJZFQgZXn/R42onF3ralFZDMoMt3r994M1Pr38sWdFXgTruRQ==",
+        "dependencies": {
+          "Microsoft.Extensions.Hosting.Abstractions": "8.0.0",
+          "NATS.Net": "2.4.0"
         }
       },
       "NATS.Net": {
