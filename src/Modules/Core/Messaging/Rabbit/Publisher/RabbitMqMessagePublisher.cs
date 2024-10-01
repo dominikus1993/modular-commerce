@@ -1,7 +1,9 @@
 using System.Text.Json;
+using EasyNetQ;
 using Modular.Ecommerce.Core.Messaging.Abstraction;
 using Modular.Ecommerce.Core.Types;
 using RabbitMQ.Client;
+using IMessage = Modular.Ecommerce.Core.Messaging.Abstraction.IMessage;
 
 namespace Modular.Ecommerce.Core.Messaging.Rabbit.Publisher;
 
@@ -33,23 +35,20 @@ public sealed class RabbitMqPublisherConfiguration<T> where T : IMessage
 
 internal sealed class RabbitMqMessagePublisher<T> : IMessagePublisher<T> where T : IMessage
 {
-    private readonly IChannel _rabbitMqChannel;
+    private readonly IAdvancedBus _bus;
     private readonly IMessageSerializer<T> _messageSerializer;
     private RabbitMqPublisherConfiguration<T> _publisherConfiguration;
     
-    public RabbitMqMessagePublisher(IChannel rabbitMqChannel, IMessageSerializer<T> messageSerializer, RabbitMqPublisherConfiguration<T> publisherConfiguration)
+    public RabbitMqMessagePublisher(IAdvancedBus bus, IMessageSerializer<T> messageSerializer, RabbitMqPublisherConfiguration<T> publisherConfiguration)
     {
-        _rabbitMqChannel = rabbitMqChannel;
+        _bus = bus;
         _messageSerializer = messageSerializer;
         _publisherConfiguration = publisherConfiguration;
     }
 
     public async ValueTask<Result<Unit>> PublishAsync(T message, CancellationToken cancellationToken = default)
     {
-        var msgBody = _messageSerializer.Serialize(message);
-        await _rabbitMqChannel.BasicPublishAsync(_publisherConfiguration.ExchangeName, _publisherConfiguration.RouteKey,
-            false, new BasicProperties(), msgBody, cancellationToken);
-
+        await _bus.PublishAsync(_publisherConfiguration.ExchangeName, _publisherConfiguration.RouteKey, false, new Message<T>(message), cancellationToken: cancellationToken);
         return Result.UnitResult;
     }
 }

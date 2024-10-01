@@ -2,6 +2,36 @@
   "version": 2,
   "dependencies": {
     "net8.0": {
+      "EasyNetQ": {
+        "type": "Direct",
+        "requested": "[8.0.0-beta98, )",
+        "resolved": "8.0.0-beta98",
+        "contentHash": "8bgp+ActYTjROBoMEgTcUW8sRwQLp9V5C+Dz1aJuBfISU8AZjITsDMgV1bINhXtWSIZUpsRgE/KQDIXEPCHWkQ==",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
+          "RabbitMQ.Client": "6.8.1"
+        }
+      },
+      "EasyNetQ.DI.Microsoft": {
+        "type": "Direct",
+        "requested": "[8.0.0-beta96, )",
+        "resolved": "8.0.0-beta96",
+        "contentHash": "i76LOicc3e3wxbWDVBPbGpu/WjOcBhgvAdvn67XHbxGoN68mzAH9zK4G3LD/AAdCdduyb4cSrjNJmal99kh+0w==",
+        "dependencies": {
+          "EasyNetQ": "8.0.0-beta96",
+          "Microsoft.Extensions.DependencyInjection": "6.0.0"
+        }
+      },
+      "EasyNetQ.Serialization.SystemTextJson": {
+        "type": "Direct",
+        "requested": "[8.0.0-beta98, )",
+        "resolved": "8.0.0-beta98",
+        "contentHash": "jleCnJ6j02FpydKwR9p+IX1P3rPXNlq2C0q75MpKu4JhATAeTDeKvS7k06xYsqnP2Zt2jbDPd66XQ5Z+w03zgA==",
+        "dependencies": {
+          "EasyNetQ": "8.0.0-beta98"
+        }
+      },
       "NATS.Extensions.Microsoft.DependencyInjection": {
         "type": "Direct",
         "requested": "[2.4.0, )",

@@ -1,6 +1,9 @@
 <Project>
   <ItemGroup>
     <PackageVersion Include="AutoFixture.Xunit2" Version="4.18.1" />
+    <PackageVersion Include="EasyNetQ" Version="8.0.0-beta98" />
+    <PackageVersion Include="EasyNetQ.DI.Microsoft" Version="8.0.0-beta96" />
+    <PackageVersion Include="EasyNetQ.Serialization.SystemTextJson" Version="8.0.0-beta98" />
     <PackageVersion Include="FluentValidation" Version="11.10.0" />
     <PackageVersion Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageVersion Include="Meziantou.Extensions.Logging.Xunit" Version="1.0.7" />

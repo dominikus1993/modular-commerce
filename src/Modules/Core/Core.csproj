@@ -5,6 +5,9 @@
         <RootNamespace>Modular.Ecommerce.Core</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
+      <PackageReference Include="EasyNetQ" />
+      <PackageReference Include="EasyNetQ.DI.Microsoft" />
+      <PackageReference Include="EasyNetQ.Serialization.SystemTextJson" />
       <PackageReference Include="NATS.Extensions.Microsoft.DependencyInjection" />
       <PackageReference Include="NATS.Net" />
       <PackageReference Include="RabbitMQ.Client" />

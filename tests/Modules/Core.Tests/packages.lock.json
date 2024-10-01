@@ -54,6 +54,15 @@
           "System.ComponentModel.Annotations": "4.3.0"
         }
       },
+      "EasyNetQ.DI.Microsoft": {
+        "type": "Transitive",
+        "resolved": "8.0.0-beta96",
+        "contentHash": "i76LOicc3e3wxbWDVBPbGpu/WjOcBhgvAdvn67XHbxGoN68mzAH9zK4G3LD/AAdCdduyb4cSrjNJmal99kh+0w==",
+        "dependencies": {
+          "EasyNetQ": "8.0.0-beta96",
+          "Microsoft.Extensions.DependencyInjection": "6.0.0"
+        }
+      },
       "Fare": {
         "type": "Transitive",
         "resolved": "2.1.1",
@@ -1317,6 +1326,9 @@
       "core": {
         "type": "Project",
         "dependencies": {
+          "EasyNetQ": "[8.0.0-beta98, )",
+          "EasyNetQ.DI.Microsoft": "[8.0.0-beta96, )",
+          "EasyNetQ.Serialization.SystemTextJson": "[8.0.0-beta98, )",
           "NATS.Extensions.Microsoft.DependencyInjection": "[2.4.0, )",
           "NATS.Net": "[2.4.0, )",
           "RabbitMQ.Client": "[7.0.0-rc.11, )",
@@ -1327,6 +1339,26 @@
           "Serilog.Formatting.Elasticsearch": "[10.0.0, )",
           "Serilog.Settings.Configuration": "[8.0.2, )",
           "Serilog.Sinks.OpenTelemetry": "[4.1.0, )"
+        }
+      },
+      "EasyNetQ": {
+        "type": "CentralTransitive",
+        "requested": "[8.0.0-beta98, )",
+        "resolved": "8.0.0-beta98",
+        "contentHash": "8bgp+ActYTjROBoMEgTcUW8sRwQLp9V5C+Dz1aJuBfISU8AZjITsDMgV1bINhXtWSIZUpsRgE/KQDIXEPCHWkQ==",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
+          "RabbitMQ.Client": "6.8.1"
+        }
+      },
+      "EasyNetQ.Serialization.SystemTextJson": {
+        "type": "CentralTransitive",
+        "requested": "[8.0.0-beta98, )",
+        "resolved": "8.0.0-beta98",
+        "contentHash": "jleCnJ6j02FpydKwR9p+IX1P3rPXNlq2C0q75MpKu4JhATAeTDeKvS7k06xYsqnP2Zt2jbDPd66XQ5Z+w03zgA==",
+        "dependencies": {
+          "EasyNetQ": "8.0.0-beta98"
         }
       },
       "NATS.Extensions.Microsoft.DependencyInjection": {
