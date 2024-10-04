@@ -30,13 +30,13 @@
       },
       "xunit": {
         "type": "Direct",
-        "requested": "[2.9.1, )",
-        "resolved": "2.9.1",
-        "contentHash": "db2l1I1Tde7OivowgxoxKgmqFl02KoOjFOQhV1FSVu+odTIntjhQhMwKIVvyWjBO6t7tS0PnFxblwSqeUuRZMQ==",
+        "requested": "[2.9.2, )",
+        "resolved": "2.9.2",
+        "contentHash": "7LhFS2N9Z6Xgg8aE5lY95cneYivRMfRI8v+4PATa4S64D5Z/Plkg0qa8dTRHSiGRgVZ/CL2gEfJDE5AUhOX+2Q==",
         "dependencies": {
           "xunit.analyzers": "1.16.0",
-          "xunit.assert": "2.9.1",
-          "xunit.core": "[2.9.1]"
+          "xunit.assert": "2.9.2",
+          "xunit.core": "[2.9.2]"
         }
       },
       "xunit.runner.visualstudio": {
@@ -52,15 +52,6 @@
         "dependencies": {
           "Fare": "[2.1.1, 3.0.0)",
           "System.ComponentModel.Annotations": "4.3.0"
-        }
-      },
-      "EasyNetQ.DI.Microsoft": {
-        "type": "Transitive",
-        "resolved": "8.0.0-beta96",
-        "contentHash": "i76LOicc3e3wxbWDVBPbGpu/WjOcBhgvAdvn67XHbxGoN68mzAH9zK4G3LD/AAdCdduyb4cSrjNJmal99kh+0w==",
-        "dependencies": {
-          "EasyNetQ": "8.0.0-beta96",
-          "Microsoft.Extensions.DependencyInjection": "6.0.0"
         }
       },
       "Fare": {
@@ -1295,32 +1286,32 @@
       },
       "xunit.assert": {
         "type": "Transitive",
-        "resolved": "2.9.1",
-        "contentHash": "Pb7x7MPfFgwRt88sJGbct/h7cc0wyxFHPhA2X0P8mUdPyrOTLN7QgsxX8ZFkJKm+Yj8YMKYOCzXtRWOGlMYjZw=="
+        "resolved": "2.9.2",
+        "contentHash": "QkNBAQG4pa66cholm28AxijBjrmki98/vsEh4Sx5iplzotvPgpiotcxqJQMRC8d7RV7nIT8ozh97957hDnZwsQ=="
       },
       "xunit.core": {
         "type": "Transitive",
-        "resolved": "2.9.1",
-        "contentHash": "39DvKrtALB6DknhJrhTIwKF5wwuWqohGT0tEJnOstT2NfoDbvVKFv/hlgM6hH2ghUsxOhP0gHmj7HOR4D21fow==",
+        "resolved": "2.9.2",
+        "contentHash": "O6RrNSdmZ0xgEn5kT927PNwog5vxTtKrWMihhhrT0Sg9jQ7iBDciYOwzBgP2krBEk5/GBXI18R1lKvmnxGcb4w==",
         "dependencies": {
-          "xunit.extensibility.core": "[2.9.1]",
-          "xunit.extensibility.execution": "[2.9.1]"
+          "xunit.extensibility.core": "[2.9.2]",
+          "xunit.extensibility.execution": "[2.9.2]"
         }
       },
       "xunit.extensibility.core": {
         "type": "Transitive",
-        "resolved": "2.9.1",
-        "contentHash": "lAsb+57Lk2gA/LW/IzlGlq0vyx5AgLtadJyGBUaS353HJT++qKdMlYi74pWgai7RLTnkV4ayownPredKe8REZQ==",
+        "resolved": "2.9.2",
+        "contentHash": "Ol+KlBJz1x8BrdnhN2DeOuLrr1I/cTwtHCggL9BvYqFuVd/TUSzxNT5O0NxCIXth30bsKxgMfdqLTcORtM52yQ==",
         "dependencies": {
           "xunit.abstractions": "2.0.3"
         }
       },
       "xunit.extensibility.execution": {
         "type": "Transitive",
-        "resolved": "2.9.1",
-        "contentHash": "KJ2LE0lOaN2wxtwwfM9nii218nzmxwMAqpolQJ0ZoLtZQ3gfJ1XtbEywGOCGZf9zBe9pPBEILqQaUO04lnekvQ==",
+        "resolved": "2.9.2",
+        "contentHash": "rKMpq4GsIUIJibXuZoZ8lYp5EpROlnYaRpwu9Zr0sRZXE7JqJfEEbCsUriZqB+ByXCLFBJyjkTRULMdC+U566g==",
         "dependencies": {
-          "xunit.extensibility.core": "[2.9.1]"
+          "xunit.extensibility.core": "[2.9.2]"
         }
       },
       "core": {
@@ -1332,13 +1323,13 @@
           "NATS.Extensions.Microsoft.DependencyInjection": "[2.4.0, )",
           "NATS.Net": "[2.4.0, )",
           "RabbitMQ.Client": "[7.0.0-rc.11, )",
-          "Serilog": "[4.0.1, )",
+          "Serilog": "[4.0.2, )",
           "Serilog.AspNetCore": "[8.0.2, )",
           "Serilog.Enrichers.Span": "[3.1.0, )",
           "Serilog.Exceptions": "[8.4.0, )",
           "Serilog.Formatting.Elasticsearch": "[10.0.0, )",
           "Serilog.Settings.Configuration": "[8.0.2, )",
-          "Serilog.Sinks.OpenTelemetry": "[4.1.0, )"
+          "Serilog.Sinks.OpenTelemetry": "[4.1.1, )"
         }
       },
       "EasyNetQ": {
@@ -1350,6 +1341,16 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
           "RabbitMQ.Client": "6.8.1"
+        }
+      },
+      "EasyNetQ.DI.Microsoft": {
+        "type": "CentralTransitive",
+        "requested": "[8.0.0-beta96, )",
+        "resolved": "8.0.0-beta96",
+        "contentHash": "i76LOicc3e3wxbWDVBPbGpu/WjOcBhgvAdvn67XHbxGoN68mzAH9zK4G3LD/AAdCdduyb4cSrjNJmal99kh+0w==",
+        "dependencies": {
+          "EasyNetQ": "8.0.0-beta96",
+          "Microsoft.Extensions.DependencyInjection": "6.0.0"
         }
       },
       "EasyNetQ.Serialization.SystemTextJson": {
@@ -1398,9 +1399,9 @@
       },
       "Serilog": {
         "type": "CentralTransitive",
-        "requested": "[4.0.1, )",
-        "resolved": "4.0.1",
-        "contentHash": "pzeDRXdpSLSsgBHpZcmpIDxqMy845Ab4s+dfnBg0sN9h8q/4Wo3vAoe0QCGPze1Q06EVtEPupS+UvLm8iXQmTQ=="
+        "requested": "[4.0.2, )",
+        "resolved": "4.0.2",
+        "contentHash": "Vehq4uNYtURe/OnHEpWGvMgrvr5Vou7oZLdn3BuEH5FSCeHXDpNJtpzWoqywXsSvCTuiv0I65mZDRnJSeUvisA=="
       },
       "Serilog.AspNetCore": {
         "type": "CentralTransitive",
@@ -1460,9 +1461,9 @@
       },
       "Serilog.Sinks.OpenTelemetry": {
         "type": "CentralTransitive",
-        "requested": "[4.1.0, )",
-        "resolved": "4.1.0",
-        "contentHash": "zYKe2TIeWZE4sFUlbGAk94Ae46xgp20dsiw52m2KnRe34zBRQmb+GjYvcpciqMR3nskWebWODjJe2yRTDR3q8g==",
+        "requested": "[4.1.1, )",
+        "resolved": "4.1.1",
+        "contentHash": "1WylKFYPSdWZoOAxCFeOWZ14eo4H4zm79m6UogAlIji4IJX9Da83jnsAi8VKrOTOVYxQ4g6+TQvp1zC3fPJDkA==",
         "dependencies": {
           "Google.Protobuf": "3.26.1",
           "Grpc.Net.Client": "2.62.0",

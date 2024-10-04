@@ -13,23 +13,14 @@
       },
       "Swashbuckle.AspNetCore": {
         "type": "Direct",
-        "requested": "[6.8.0, )",
-        "resolved": "6.8.0",
-        "contentHash": "0Mk8/31efsxFNVeFzLjUVYDFTjYKtEi2UCSaI9+HIkSQ/duu++28gfq1+gwWDRLHkRMOkUgoWMLe0UoayAZySA==",
+        "requested": "[6.8.1, )",
+        "resolved": "6.8.1",
+        "contentHash": "JN6ccH37QKtNOwBrvSxc+jBYIB+cw6RlZie2IKoJhjjf6HzBH+2kPJCpxmJ5EHIqmxvq6aQG+0A8XklGx9rAxA==",
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
-          "Swashbuckle.AspNetCore.Swagger": "6.8.0",
-          "Swashbuckle.AspNetCore.SwaggerGen": "6.8.0",
-          "Swashbuckle.AspNetCore.SwaggerUI": "6.8.0"
-        }
-      },
-      "EasyNetQ.DI.Microsoft": {
-        "type": "Transitive",
-        "resolved": "8.0.0-beta96",
-        "contentHash": "i76LOicc3e3wxbWDVBPbGpu/WjOcBhgvAdvn67XHbxGoN68mzAH9zK4G3LD/AAdCdduyb4cSrjNJmal99kh+0w==",
-        "dependencies": {
-          "EasyNetQ": "8.0.0-beta96",
-          "Microsoft.Extensions.DependencyInjection": "6.0.0"
+          "Swashbuckle.AspNetCore.Swagger": "6.8.1",
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.8.1",
+          "Swashbuckle.AspNetCore.SwaggerUI": "6.8.1"
         }
       },
       "FluentValidation.DependencyInjectionExtensions": {
@@ -307,24 +298,24 @@
       },
       "Swashbuckle.AspNetCore.Swagger": {
         "type": "Transitive",
-        "resolved": "6.8.0",
-        "contentHash": "f6Utk5eLFWRJbDFIqHGeb9Kb+w/9b+z0WIJUIAPY4hP263MPXI8ZbejdOktS10gvCLaQ3YCFl6fAVlCIUFKsRQ==",
+        "resolved": "6.8.1",
+        "contentHash": "eOkdM4bsWBU5Ty3kWbyq5O9L+05kZT0vOdGh4a92vIb/LLQGQTPLRHXuJdnUBNIPNC8XfKWfSbtRfqzI6nnbqw==",
         "dependencies": {
           "Microsoft.OpenApi": "1.6.14"
         }
       },
       "Swashbuckle.AspNetCore.SwaggerGen": {
         "type": "Transitive",
-        "resolved": "6.8.0",
-        "contentHash": "bmWglb1jeKD+tUE56wL2zE6lnlpJZbgDLXMlEOgl8xTqEs9g8C6eNNKGuMcnfxFt0CgZaBClaDqad2JDjZW5Fw==",
+        "resolved": "6.8.1",
+        "contentHash": "TjBPxsN0HeJzxEXZYeDXBNNMSyhg+TYXtkbwX+Cn8GH/y5ZeoB/chw0p71kRo5tR2sNshbKwL24T6f9pTF9PHg==",
         "dependencies": {
-          "Swashbuckle.AspNetCore.Swagger": "6.8.0"
+          "Swashbuckle.AspNetCore.Swagger": "6.8.1"
         }
       },
       "Swashbuckle.AspNetCore.SwaggerUI": {
         "type": "Transitive",
-        "resolved": "6.8.0",
-        "contentHash": "tG1FL+aFmmuqZ3eKVHgvSFvrzJoKbDzOmvK8YACucfbIBYfHQd45uQ18MhMF3xDaR46qdggdaHGqmfYo+nxwrw=="
+        "resolved": "6.8.1",
+        "contentHash": "lpEszYJ7vZaTTE5Dp8MrsbSHrgDfjhDMjzW1qOA1Xs1Dnj3ZRBJAcPZUTsa5Bva+nLaw91JJ8OI8FkSg8hhIyA=="
       },
       "System.Buffers": {
         "type": "Transitive",
@@ -378,13 +369,13 @@
           "NATS.Extensions.Microsoft.DependencyInjection": "[2.4.0, )",
           "NATS.Net": "[2.4.0, )",
           "RabbitMQ.Client": "[7.0.0-rc.11, )",
-          "Serilog": "[4.0.1, )",
+          "Serilog": "[4.0.2, )",
           "Serilog.AspNetCore": "[8.0.2, )",
           "Serilog.Enrichers.Span": "[3.1.0, )",
           "Serilog.Exceptions": "[8.4.0, )",
           "Serilog.Formatting.Elasticsearch": "[10.0.0, )",
           "Serilog.Settings.Configuration": "[8.0.2, )",
-          "Serilog.Sinks.OpenTelemetry": "[4.1.0, )"
+          "Serilog.Sinks.OpenTelemetry": "[4.1.1, )"
         }
       },
       "EasyNetQ": {
@@ -396,6 +387,16 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
           "RabbitMQ.Client": "6.8.1"
+        }
+      },
+      "EasyNetQ.DI.Microsoft": {
+        "type": "CentralTransitive",
+        "requested": "[8.0.0-beta96, )",
+        "resolved": "8.0.0-beta96",
+        "contentHash": "i76LOicc3e3wxbWDVBPbGpu/WjOcBhgvAdvn67XHbxGoN68mzAH9zK4G3LD/AAdCdduyb4cSrjNJmal99kh+0w==",
+        "dependencies": {
+          "EasyNetQ": "8.0.0-beta96",
+          "Microsoft.Extensions.DependencyInjection": "6.0.0"
         }
       },
       "EasyNetQ.Serialization.SystemTextJson": {
@@ -480,9 +481,9 @@
       },
       "Serilog": {
         "type": "CentralTransitive",
-        "requested": "[4.0.1, )",
-        "resolved": "4.0.1",
-        "contentHash": "pzeDRXdpSLSsgBHpZcmpIDxqMy845Ab4s+dfnBg0sN9h8q/4Wo3vAoe0QCGPze1Q06EVtEPupS+UvLm8iXQmTQ=="
+        "requested": "[4.0.2, )",
+        "resolved": "4.0.2",
+        "contentHash": "Vehq4uNYtURe/OnHEpWGvMgrvr5Vou7oZLdn3BuEH5FSCeHXDpNJtpzWoqywXsSvCTuiv0I65mZDRnJSeUvisA=="
       },
       "Serilog.AspNetCore": {
         "type": "CentralTransitive",
@@ -542,9 +543,9 @@
       },
       "Serilog.Sinks.OpenTelemetry": {
         "type": "CentralTransitive",
-        "requested": "[4.1.0, )",
-        "resolved": "4.1.0",
-        "contentHash": "zYKe2TIeWZE4sFUlbGAk94Ae46xgp20dsiw52m2KnRe34zBRQmb+GjYvcpciqMR3nskWebWODjJe2yRTDR3q8g==",
+        "requested": "[4.1.1, )",
+        "resolved": "4.1.1",
+        "contentHash": "1WylKFYPSdWZoOAxCFeOWZ14eo4H4zm79m6UogAlIji4IJX9Da83jnsAi8VKrOTOVYxQ4g6+TQvp1zC3fPJDkA==",
         "dependencies": {
           "Google.Protobuf": "3.26.1",
           "Grpc.Net.Client": "2.62.0",
