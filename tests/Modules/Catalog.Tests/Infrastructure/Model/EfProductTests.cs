@@ -11,7 +11,7 @@ public class OpenSearchProductTests
     [AutoData]
     internal void TestToProduct(OpenSearchProduct product)
     {
-        product.ProductId = Guid.NewGuid();
+        product.ProductId = Guid.CreateVersion7();
         var subject = product.ToProduct();
 
         subject.ShouldNotBeNull();

@@ -26,7 +26,7 @@ public readonly record struct ItemId(Guid Value)
 {
     public static ItemId From(Guid id) => new ItemId(id);
     
-    public static ItemId New() => new ItemId(Guid.NewGuid());
+    public static ItemId New() => new ItemId(Guid.CreateVersion7());
     
     public static implicit operator Guid (ItemId id) => id.Value;
     
