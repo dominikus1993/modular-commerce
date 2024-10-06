@@ -73,7 +73,7 @@ internal sealed class Message<T> : IMessage<T>
     public Type MessageType { get; }
     public T Body { get; }
 
-    public object? GetBody() { return Body; }
+    public object? GetBody() => Body;
     public MessageProperties Properties { get; }
 
     private Message(T body, MessageProperties properties, Type messageType)
@@ -86,7 +86,6 @@ internal sealed class Message<T> : IMessage<T>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Message<T> Create(T body, MessageProperties properties)
     {
-        ArgumentNullException.ThrowIfNull(properties);
         ArgumentNullException.ThrowIfNull(body);
         return new Message<T>(body, properties, CachedType);
     }
