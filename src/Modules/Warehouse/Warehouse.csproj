@@ -9,7 +9,10 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Api\" />
-      <Folder Include="Core\Repository\" />
+      <Folder Include="Infrastructure\" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="Marten.AspNetCore" />
     </ItemGroup>
 
 </Project>
