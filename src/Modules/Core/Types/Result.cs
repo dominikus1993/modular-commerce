@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using Modular.Ecommerce.Core.Exceptions;
 
 namespace Modular.Ecommerce.Core.Types;
@@ -7,15 +8,15 @@ public static class Result
 {
     public static Result<T> Ok<T>(T ok)
     {
-        return new Success<T>(ok);
+        return new Result<T>(ok);
     }
     
     public static Result<T> Failure<T>(Exception exception)
     {
-        return new Failure<T>(exception);
+        return new Result<T>(exception);
     }
 
-    public static readonly Result<Unit> UnitResult = new Success<Unit>(Unit.Value);
+    public static readonly Result<Unit> UnitResult = new(Unit.Value);
 
     public static Result<B> ToError<A, B>(this Result<A> res)
     {
@@ -40,117 +41,125 @@ public static class Result
     }
 }
 
-public abstract class Result<T>
+
+public readonly struct Result<T> : IEquatable<Result<T>>
 {
-    internal Result()
+    private enum ResultState : byte
     {
-        
+        Succeed,
+        Error,
     }
+
+    internal readonly T? Success;
+    internal readonly Exception? Error;
     
-    public abstract bool IsSuccess { get; }
-    public abstract T Value { get; }
-    public abstract Exception ErrorValue { get; }
-    public abstract Result<TRes> Map<TRes>(Func<T, TRes> map);
-    public abstract TRes Match<TRes>(Func<T, TRes> ok, Func<Exception, TRes> error);
-    public abstract void Match(Action<T> ok, Action<Exception> error);
-    public abstract Task<TRes> MatchTask<TRes>(Func<T, CancellationToken, Task<TRes>> ok, Func<Exception, CancellationToken, Task<TRes>> error, CancellationToken token = default);
-    public abstract Task MatchTask(Func<T, CancellationToken, Task> ok, Func<Exception, CancellationToken, Task> error, CancellationToken cancellationToken = default);
-    public abstract object? Case { get; }
-}
+    public T Value => IsSuccess ? Success : throw new ValueIsErrorException(Error);
+    
+    public Exception ErrorValue => IsSuccess ? throw new ValueIsSuccessException<T>(Success) : Error;
+    public object Case => IsSuccess ? Success : Error;
 
-public sealed class Success<T>: Result<T>
-{
-    internal readonly T Ok;
-        
-    public Success(T ok)
+    private readonly ResultState _state;
+
+    [MemberNotNullWhen(true, nameof(Success))]
+    [MemberNotNullWhen(true, nameof(Value))]
+    [MemberNotNullWhen(false, nameof(Error))]
+    [MemberNotNullWhen(false, nameof(ErrorValue))]
+    public bool IsSuccess => _state == ResultState.Succeed;
+
+    internal Result(T success)
     {
-        ArgumentNullException.ThrowIfNull(ok);
-        Ok = ok;
+        ArgumentNullException.ThrowIfNull(success);
+        Success = success;
+        Error = default;
+        _state = ResultState.Succeed;
     }
 
-    public override bool IsSuccess => true;
-    public override T Value => Ok;
-    public override Exception ErrorValue => throw new ValueIsSuccessException<T>(Ok);
-    public override Result<TRes> Map<TRes>(Func<T, TRes> map)
-    {
-        ArgumentNullException.ThrowIfNull(map);
-        var res = map(Ok);
-        return new Success<TRes>(res);
-    }
-
-    public override TRes Match<TRes>(Func<T, TRes> ok, Func<Exception, TRes> error)
-    {
-        var res = ok(Ok);
-        return res;
-    }
-
-    public override void Match(Action<T> ok, Action<Exception> error)
-    {
-        ok(Ok);
-    }
-
-    public override Task<TRes> MatchTask<TRes>(Func<T, CancellationToken, Task<TRes>> ok, Func<Exception, CancellationToken, Task<TRes>> error, CancellationToken token = default)
-    {
-        return ok(Ok, token);
-    }
-
-    public override Task MatchTask(Func<T, CancellationToken, Task> ok, Func<Exception, CancellationToken, Task> error, CancellationToken cancellationToken = default)
-    {
-        return ok(Ok, cancellationToken);
-    }
-
-    public override object? Case => Ok;
-
-    public void Deconstruct(out T ok)
-    {
-        ok = Ok;
-    }
-}
-
-
-internal sealed class Failure<T>: Result<T>
-{
-    internal readonly Exception Error;
-        
-    public Failure(Exception error)
+    internal Result(Exception error)
     {
         ArgumentNullException.ThrowIfNull(error);
+        Success = default;
         Error = error;
+        _state = ResultState.Error;
+    }
+    
+    
+    [System.Diagnostics.Contracts.Pure]
+    public Result<TR> Map<TR>(Func<T, TR> func)
+    {
+        if (!IsSuccess)
+        {
+            return Result.Failure<TR>(Error);
+        }
+        return Result.Ok(func(Success));
     }
 
-    public override bool IsSuccess => false;
-    public override T Value => throw new ValueIsErrorException(Error);
-    public override Exception ErrorValue => Error;
-    public override Result<TRes> Map<TRes>(Func<T, TRes> map)
+    [System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public TRes Match<TRes>(Func<T, TRes> ok, Func<Exception, TRes> error)
     {
-        return new Failure<TRes>(Error);
+        if (!IsSuccess)
+        {
+            return error(Error);
+        }
+        return ok(Success);
     }
 
-    public override TRes Match<TRes>(Func<T, TRes> ok, Func<Exception, TRes> error)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void Match(Action<T> ok, Action<Exception> error)
     {
-        var res = error(Error);
-        return res;
+        if (IsSuccess)
+        {
+            ok(Success);
+        }
+        else
+        {
+            error(Error);
+        }
     }
 
-    public override void Match(Action<T> ok, Action<Exception> error)
+    [System.Diagnostics.Contracts.Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public Task<TRes> MatchTask<TRes>(Func<T, CancellationToken, Task<TRes>> ok,
+        Func<Exception, CancellationToken, Task<TRes>> error, CancellationToken token = default)
     {
-        error(ErrorValue);
-    }
-
-    public override Task<TRes> MatchTask<TRes>(Func<T, CancellationToken, Task<TRes>> ok, Func<Exception, CancellationToken, Task<TRes>> error, CancellationToken token = default)
-    {
+        if (IsSuccess)
+        {
+            return ok(Success, token);
+        }
         return error(Error, token);
     }
 
-    public override Task MatchTask(Func<T, CancellationToken, Task> ok, Func<Exception, CancellationToken, Task> error, CancellationToken cancellationToken = default)
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public Task MatchTask(Func<T, CancellationToken, Task> ok, Func<Exception, CancellationToken, Task> error,
+        CancellationToken cancellationToken = default)
     {
+        if (IsSuccess)
+        {
+            return ok(Success, cancellationToken);
+        }
         return error(Error, cancellationToken);
     }
 
-    public override object? Case => Error;
-
-    public void Deconstruct(out Exception error)
+    public bool Equals(Result<T> other)
     {
-        error = Error;
+        return EqualityComparer<T?>.Default.Equals(Success, other.Success) && Equals(Error, other.Error) && _state == other._state;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is Result<T> other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Success, Error, (int)_state);
+    }
+
+    public static bool operator ==(Result<T> left, Result<T> right)
+    {
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(Result<T> left, Result<T> right)
+    {
+        return !(left == right);
     }
 }

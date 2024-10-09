@@ -25,8 +25,7 @@ public sealed class OpenSearchProductsWriterTests : IClassFixture<OpenSearchFixt
     {
         // Act
         var subject = await _productsWriter.AddProduct(product);
-                    
-        subject.ShouldNotBeNull();
+        
         subject.IsSuccess.ShouldBeTrue();
     }
     
@@ -37,7 +36,6 @@ public sealed class OpenSearchProductsWriterTests : IClassFixture<OpenSearchFixt
         // Act
         var subject = await _productsWriter.AddProduct(product);
         
-        subject.ShouldNotBeNull();
         subject.IsSuccess.ShouldBeTrue();
         
         var productFromDb = await _productReader.GetById(product.Id);
@@ -52,7 +50,6 @@ public sealed class OpenSearchProductsWriterTests : IClassFixture<OpenSearchFixt
         // Act
         var subject = await _productsWriter.AddProducts(new []{product});
         
-        subject.ShouldNotBeNull();
         subject.IsSuccess.ShouldBeTrue();
         
         var productFromDb = await _productReader.GetById(product.Id);
@@ -67,13 +64,11 @@ public sealed class OpenSearchProductsWriterTests : IClassFixture<OpenSearchFixt
         // Act
         var subject = await _productsWriter.AddProduct(product);
         
-        subject.ShouldNotBeNull();
         subject.IsSuccess.ShouldBeTrue();
     
         var newProduct = product with { ProductName = newProductName };
         subject = await _productsWriter.AddProduct(newProduct);
-        
-        subject.ShouldNotBeNull();
+
         subject.IsSuccess.ShouldBeTrue();
         
         var productFromDb = await _productReader.GetById(product.Id);
