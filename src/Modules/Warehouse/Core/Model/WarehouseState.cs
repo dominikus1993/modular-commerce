@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Warehouse.Core.Model;
 
 public readonly record struct ItemWarehouseQuantity(int Value)
@@ -59,7 +61,39 @@ public sealed class ItemReserved
     public ItemSoldQuantity SoldQuantity { get; init; }
 }
 
-public sealed record WarehouseState(ItemId ItemId, ItemAvailability Availability)
+public abstract class AggregateBase
+{
+    // For indexing our event streams
+    public string Id { get; protected set; }
+
+    // For protecting the state, i.e. conflict prevention
+    // The setter is only public for setting up test conditions
+    public long Version { get; set; }
+
+    // JsonIgnore - for making sure that it won't be stored in inline projection
+    [JsonIgnore] 
+    private readonly List<object> _uncommittedEvents = new List<object>();
+
+    // Get the deltas, i.e. events that make up the state, not yet persisted
+    public IEnumerable<object> GetUncommittedEvents()
+    {
+        return _uncommittedEvents;
+    }
+
+    // Mark the deltas as persisted.
+    public void ClearUncommittedEvents()
+    {
+        _uncommittedEvents.Clear();
+    }
+
+    protected void AddUncommittedEvent(object @event)
+    {
+        // add the event to the uncommitted list
+        _uncommittedEvents.Add(@event);
+    }
+}
+
+public sealed class WarehouseState(ItemId itemId, ItemAvailability availability) : AggregateBase
 {
     public WarehouseState Apply(ItemReserved request)
     {
@@ -70,5 +104,14 @@ public sealed record WarehouseState(ItemId ItemId, ItemAvailability Availability
         
         var newSoldQ = Availability.SoldQuantity + request.SoldQuantity;
         return this with { Availability = Availability with { SoldQuantity = newSoldQ } };
+    }
+
+    public ItemId ItemId { get; init; } = itemId;
+    public ItemAvailability Availability { get; init; } = availability;
+
+    public void Deconstruct(out ItemId ItemId, out ItemAvailability Availability)
+    {
+        ItemId = this.ItemId;
+        Availability = this.Availability;
     }
 }

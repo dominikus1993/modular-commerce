@@ -2066,6 +2066,7 @@
       "warehouse": {
         "type": "Project",
         "dependencies": {
+          "Core": "[1.0.0, )",
           "Marten.AspNetCore": "[7.29.0, )"
         }
       },

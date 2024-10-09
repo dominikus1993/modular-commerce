@@ -2,7 +2,7 @@ using Warehouse.Core.Model;
 
 namespace Warehouse.Core.Repository;
 
-public interface IWarehouseStorage
+public interface ICurrentWarehouseStateReader
 {
     Task<CurrentWarehouseState?> GetWarehouseState(ItemId itemId, CancellationToken cancellationToken = default);
 }
