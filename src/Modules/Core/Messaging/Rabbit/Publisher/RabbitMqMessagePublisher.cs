@@ -1,6 +1,5 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using EasyNetQ;
 using Modular.Ecommerce.Core.Messaging.Abstraction;
 using Modular.Ecommerce.Core.Types;
 using RabbitMQ.Client;
@@ -39,11 +38,11 @@ public sealed class RabbitMqPublisherConfiguration<T> where T : IMessage
 internal sealed class RabbitMqMessagePublisher<T> : IMessagePublisher<T> where T : IMessage
 {
     private static readonly Type MessageType = typeof(T);
-    private readonly IAdvancedBus _bus;
+    private readonly IChannel _bus;
     private readonly IMessageSerializer<T> _messageSerializer;
     private readonly RabbitMqPublisherConfiguration<T> _publisherConfiguration;
     
-    public RabbitMqMessagePublisher(IAdvancedBus bus, IMessageSerializer<T> messageSerializer, RabbitMqPublisherConfiguration<T> publisherConfiguration)
+    public RabbitMqMessagePublisher(IChannel bus, IMessageSerializer<T> messageSerializer, RabbitMqPublisherConfiguration<T> publisherConfiguration)
     {
         _bus = bus;
         _messageSerializer = messageSerializer;
@@ -53,40 +52,16 @@ internal sealed class RabbitMqMessagePublisher<T> : IMessagePublisher<T> where T
     public async ValueTask<Result<Unit>> PublishAsync(T message, CancellationToken cancellationToken = default)
     {
         var props = PrepareProperties(message, _publisherConfiguration);
-        var msg = Message<T>.Create(message, props);
-        await _bus.PublishAsync(_publisherConfiguration.ExchangeName, _publisherConfiguration.RouteKey, false, msg, cancellationToken: cancellationToken);
+        var messageBody = _messageSerializer.Serialize(message);
+        await _bus.BasicPublishAsync(_publisherConfiguration.ExchangeName, _publisherConfiguration.RouteKey, false, props, messageBody, cancellationToken);
         return Result.UnitResult;
     }
     
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static MessageProperties PrepareProperties(T message, RabbitMqPublisherConfiguration<T> config)
+    private static BasicProperties PrepareProperties(T message, RabbitMqPublisherConfiguration<T> config)
     {
         ArgumentNullException.ThrowIfNull(message);
-        var messageProps = new MessageProperties { MessageId = message.MessageId, Type = MessageType.FullName, ContentType = "application/json", Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(), Expiration = config.Ttl };
-        return messageProps;
-    }
-}
-
-internal sealed class Message<T> : IMessage<T>
-{
-    private static readonly Type CachedType = typeof(T);
-    public Type MessageType { get; }
-    public T Body { get; }
-
-    public object? GetBody() => Body;
-    public MessageProperties Properties { get; }
-
-    private Message(T body, MessageProperties properties, Type messageType)
-    {
-        Body = body;
-        Properties = properties;
-        MessageType = messageType;
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Message<T> Create(T body, MessageProperties properties)
-    {
-        ArgumentNullException.ThrowIfNull(body);
-        return new Message<T>(body, properties, CachedType);
+        var properties = new BasicProperties { MessageId = message.MessageId, Type = MessageType.FullName, ContentType = "application/json", Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()), Expiration = config.Ttl?.TotalMilliseconds.ToString() };
+        return properties;
     }
 }
