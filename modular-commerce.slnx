@@ -1,0 +1,17 @@
+﻿<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/App/">
+    <Project Path="src\App\Api\Api.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/Modules/">
+    <Project Path="src\Modules\Catalog\Catalog.csproj" Type="Classic C#" />
+    <Project Path="src\Modules\Core\Core.csproj" Type="Classic C#" />
+    <Project Path="src\Modules\Warehouse\Warehouse.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/tests/" />
+  <Folder Name="/tests/Modules/">
+    <Project Path="tests\Modules\Catalog.Tests\Catalog.Tests.csproj" Type="Classic C#" />
+    <Project Path="tests\Modules\Core.Tests\Core.Tests.csproj" Type="Classic C#" />
+    <Project Path="tests\Modules\Warehouse.Tests\Warehouse.Tests.csproj" Type="Classic C#" />
+  </Folder>
+</Solution>
