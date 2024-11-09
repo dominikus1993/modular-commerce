@@ -15,7 +15,7 @@ namespace Modular.Ecommerce.Core.Logging;
 
 public class SerilogOptions
 {
-    internal readonly static Dictionary<string, string> DefaultOverride = new() { { "Microsoft.AspNetCore", "Warning" } };
+    internal static readonly Dictionary<string, string> DefaultOverride = new() { { "Microsoft.AspNetCore", "Warning" } };
     public bool ConsoleEnabled { get; set; } = true;
     public string MinimumLevel { get; set; } = "Information";
     public string Format { get; set; } = "compact";

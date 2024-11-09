@@ -29,15 +29,15 @@ public sealed class SystemTextMessageSerializer<T> : IMessageSerializer<T> where
 
 public sealed class RabbitMqPublisherConfiguration<T> where T : IMessage
 {
-    public string ExchangeName { get; }
-    public string RouteKey { get; }
+    internal static readonly Type MessageType = typeof(T);
+    public string ExchangeName { get; set; }
+    public string RouteKey { get; set; }
     
-    public TimeSpan? Ttl { get; }
+    public TimeSpan? Ttl { get; set; }
 }
 
 internal sealed class RabbitMqMessagePublisher<T> : IMessagePublisher<T> where T : IMessage
 {
-    private static readonly Type MessageType = typeof(T);
     private readonly IChannel _bus;
     private readonly IMessageSerializer<T> _messageSerializer;
     private readonly RabbitMqPublisherConfiguration<T> _publisherConfiguration;
@@ -61,7 +61,7 @@ internal sealed class RabbitMqMessagePublisher<T> : IMessagePublisher<T> where T
     private static BasicProperties PrepareProperties(T message, RabbitMqPublisherConfiguration<T> config)
     {
         ArgumentNullException.ThrowIfNull(message);
-        var properties = new BasicProperties { MessageId = message.MessageId, Type = MessageType.FullName, ContentType = "application/json", Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()), Expiration = config.Ttl?.TotalMilliseconds.ToString() };
+        var properties = new BasicProperties { MessageId = message.MessageId, Type = RabbitMqPublisherConfiguration<T>.MessageType.FullName, ContentType = "application/json", Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()), Expiration = config.Ttl?.TotalMilliseconds.ToString() };
         return properties;
     }
 }
