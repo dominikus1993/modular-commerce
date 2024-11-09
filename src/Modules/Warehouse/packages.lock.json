@@ -522,18 +522,10 @@
         "resolved": "6.0.0",
         "contentHash": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg=="
       },
-      "System.Text.Encodings.Web": {
-        "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "yev/k9GHAEGx2Rg3/tU6MQh4HGBXJs70y7j1LaM1i/ER9po+6nnQ6RRqTJn1E7Xu0fbIFK80Nh5EoODxrbxwBQ=="
-      },
       "System.Text.Json": {
         "type": "Transitive",
-        "resolved": "8.0.4",
-        "contentHash": "bAkhgDJ88XTsqczoxEMliSrpijKZHhbJQldhAmObj/RbrN3sU5dcokuXmWJWsdQAhiMJ9bTayWsL1C9fbbCRhw==",
-        "dependencies": {
-          "System.Text.Encodings.Web": "8.0.0"
-        }
+        "resolved": "8.0.5",
+        "contentHash": "0f1B50Ss7rqxXiaBJyzUu9bWFOO2/zSlifZ/UNMdiIpDYe4cY4LQQicP4nirK1OS31I43rn062UIJ1Q9bpmHpg=="
       },
       "System.Threading.Channels": {
         "type": "Transitive",
@@ -578,7 +570,8 @@
           "Serilog.Exceptions": "[8.4.0, )",
           "Serilog.Formatting.Elasticsearch": "[10.0.0, )",
           "Serilog.Settings.Configuration": "[8.0.4, )",
-          "Serilog.Sinks.OpenTelemetry": "[4.1.1, )"
+          "Serilog.Sinks.OpenTelemetry": "[4.1.1, )",
+          "System.Text.Json": "[8.0.5, )"
         }
       },
       "RabbitMQ.Client": {

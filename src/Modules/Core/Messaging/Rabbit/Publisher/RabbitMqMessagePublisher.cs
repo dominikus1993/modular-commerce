@@ -9,7 +9,7 @@ namespace Modular.Ecommerce.Core.Messaging.Rabbit.Publisher;
 
 public interface IMessageSerializer<T> where T : IMessage
 {
-    public ReadOnlyMemory<byte> Serialize(T message);
+    ReadOnlyMemory<byte> Serialize(T message);
 }
 
 public sealed class SystemTextMessageSerializer<T> : IMessageSerializer<T> where T : IMessage

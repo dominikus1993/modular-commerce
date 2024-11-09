@@ -264,6 +264,11 @@
         "resolved": "4.7.0",
         "contentHash": "VybpaOQQhqE6siHppMktjfGBw1GCwvCqiufqmP8F1nj7fTUNtW35LOEt3UZTEsECfo+ELAl/9o9nJx3U91i7vA=="
       },
+      "System.Text.Json": {
+        "type": "Transitive",
+        "resolved": "8.0.5",
+        "contentHash": "0f1B50Ss7rqxXiaBJyzUu9bWFOO2/zSlifZ/UNMdiIpDYe4cY4LQQicP4nirK1OS31I43rn062UIJ1Q9bpmHpg=="
+      },
       "System.Threading.RateLimiting": {
         "type": "Transitive",
         "resolved": "8.0.0",
@@ -289,7 +294,8 @@
           "Serilog.Exceptions": "[8.4.0, )",
           "Serilog.Formatting.Elasticsearch": "[10.0.0, )",
           "Serilog.Settings.Configuration": "[8.0.4, )",
-          "Serilog.Sinks.OpenTelemetry": "[4.1.1, )"
+          "Serilog.Sinks.OpenTelemetry": "[4.1.1, )",
+          "System.Text.Json": "[8.0.5, )"
         }
       },
       "FluentValidation": {

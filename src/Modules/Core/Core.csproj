@@ -13,5 +13,6 @@
       <PackageReference Include="Serilog.Formatting.Elasticsearch" />
       <PackageReference Include="Serilog.Settings.Configuration" />
       <PackageReference Include="Serilog.Sinks.OpenTelemetry" />
+      <PackageReference Include="System.Text.Json" />
     </ItemGroup>
 </Project>
