@@ -93,7 +93,7 @@ public abstract class AggregateBase
     }
 }
 
-public sealed record WarehouseState(ItemId itemId, ItemAvailability availability) : AggregateBase
+public sealed class WarehouseState(ItemId itemId, ItemAvailability availability) : AggregateBase
 {
     public WarehouseState Apply(ItemReserved request)
     {
@@ -103,7 +103,7 @@ public sealed record WarehouseState(ItemId itemId, ItemAvailability availability
         }
         
         var newSoldQ = Availability.SoldQuantity + request.SoldQuantity;
-        return this with { Availability = Availability with { SoldQuantity = newSoldQ } };
+        return new WarehouseState(ItemId, Availability with { SoldQuantity = newSoldQ });
     }
 
     public ItemId ItemId { get; init; } = itemId;
