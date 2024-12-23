@@ -61,7 +61,7 @@ internal sealed class RabbitMqMessagePublisher<T> : IMessagePublisher<T> where T
     private static BasicProperties PrepareProperties(T message, RabbitMqPublisherConfiguration<T> config)
     {
         ArgumentNullException.ThrowIfNull(message);
-        var properties = new BasicProperties { MessageId = message.MessageId, Type = RabbitMqPublisherConfiguration<T>.MessageType.FullName, ContentType = "application/json", Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()), Expiration = config.Ttl?.TotalMilliseconds.ToString() };
+        var properties = new BasicProperties { MessageId = message.MessageId, Type = RabbitMqPublisherConfiguration<T>.MessageType.FullName, ContentType = "application/json", Timestamp = new AmqpTimestamp(DateTimeOffset.UtcNow.ToUnixTimeSeconds()), Expiration = config.Ttl?.TotalMilliseconds.ToString() };
         return properties;
     }
 }

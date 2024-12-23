@@ -93,7 +93,7 @@ public abstract class AggregateBase
     }
 }
 
-public sealed class WarehouseState(ItemId itemId, ItemAvailability availability) : AggregateBase
+public sealed record WarehouseState(ItemId itemId, ItemAvailability availability) : AggregateBase
 {
     public WarehouseState Apply(ItemReserved request)
     {
