@@ -61,7 +61,7 @@ public sealed record PagedResult<T>(IEnumerable<T> Data, QueryResultMetadata Met
     public static readonly PagedResult<T> Empty = new([], QueryResultMetadata.Empty, 0, 0);
 }
 
-public interface IProductFilter
+internal interface IProductFilter
 {
     Task<PagedResult<Product>> FilterProducts(Filter filter, CancellationToken cancellationToken = default);
 }

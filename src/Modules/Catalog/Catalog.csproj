@@ -5,11 +5,7 @@
         <Nullable>enable</Nullable>
         <RootNamespace>Modular.Ecommerce.Catalog</RootNamespace>
     </PropertyGroup>
-    <ItemGroup>
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-            <_Parameter1>Catalog.Tests</_Parameter1>
-        </AssemblyAttribute>
-    </ItemGroup>
+    
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
@@ -24,6 +20,9 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\Core\Core.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <InternalsVisibleTo Include="Catalog.Tests" />
     </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@ using Modular.Ecommerce.Catalog.Core.Model;
 
 namespace Modular.Ecommerce.Catalog.Core.Repository;
 
-public interface IProductReader
+internal interface IProductReader
 {
     Task<Product?> GetById(ProductId id, CancellationToken cancellationToken = default);
     

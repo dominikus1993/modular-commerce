@@ -11,9 +11,9 @@ public sealed class OpenSearchFixture : IAsyncLifetime
     internal OpenSearchContainer Container { get; } = new OpenSearchBuilder().Build();
     
     private IOpenSearchClient OpenSearchClient { get; set; }
-    public IProductsWriter ProductsWriter { get; private set; }
-    public IProductReader ProductReader { get; private set; }
-    public IProductFilter ProductFilter { get; private set; }
+    internal IProductsWriter ProductsWriter { get; private set; }
+    internal IProductReader ProductReader { get; private set; }
+    internal IProductFilter ProductFilter { get; private set; }
     
     public async Task InitializeAsync()
     {

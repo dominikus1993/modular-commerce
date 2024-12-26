@@ -8,7 +8,7 @@ using SortOrder = Modular.Ecommerce.Catalog.Core.Repository.SortOrder;
 
 namespace Modular.Ecommerce.Catalog.Infrastructure.Repositories;
 
-public sealed class OpenSearchProductFilter : IProductFilter
+internal sealed class OpenSearchProductFilter : IProductFilter
 {
     private readonly IOpenSearchClient _openSearchClient;
 

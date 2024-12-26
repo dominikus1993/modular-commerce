@@ -3,7 +3,7 @@ using OpenSearch.Client;
 
 namespace Modular.Ecommerce.Catalog.Infrastructure.Model;
 
-public sealed class OpenSearchProductImage
+internal sealed class OpenSearchProductImage
 {
     public Uri Link { get; set; }
     public string Alt { get; set; }

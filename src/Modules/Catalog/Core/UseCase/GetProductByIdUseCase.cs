@@ -8,7 +8,7 @@ public sealed class GetProductByIdUseCase
 {
     private readonly IProductReader _productReader;
 
-    public GetProductByIdUseCase(IProductReader productReader)
+    internal GetProductByIdUseCase(IProductReader productReader)
     {
         _productReader = productReader;
     }

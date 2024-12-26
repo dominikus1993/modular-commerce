@@ -9,7 +9,7 @@ using Result = Modular.Ecommerce.Core.Types.Result;
 
 namespace Modular.Ecommerce.Catalog.Infrastructure.Repositories;
 
-public sealed class OpenSearchProductsWriter : IProductsWriter
+internal sealed class OpenSearchProductsWriter : IProductsWriter
 {
     private readonly IOpenSearchClient _openSearchClient;
 

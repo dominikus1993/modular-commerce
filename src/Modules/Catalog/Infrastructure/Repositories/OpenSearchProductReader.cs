@@ -7,7 +7,7 @@ using OpenSearch.Client;
 
 namespace Modular.Ecommerce.Catalog.Infrastructure.Repositories;
 
-public sealed class OpenSearchProductReader : IProductReader
+internal sealed class OpenSearchProductReader : IProductReader
 {
     private readonly IOpenSearchClient _openSearchClient;
 

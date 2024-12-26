@@ -11,7 +11,7 @@ public sealed class CatalogApiFixture: IAsyncLifetime, IDisposable
 {
     internal OpenSearchContainer OpenSearch { get; } = new OpenSearchBuilder().Build();
     private IOpenSearchClient OpenSearchClient { get; set; }
-    public IProductsWriter ProductsWriter { get; private set; }
+    internal IProductsWriter ProductsWriter { get; private set; }
     public CatalogApiFixture()
     {
     }

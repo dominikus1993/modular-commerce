@@ -9,7 +9,7 @@ public sealed class SearchProductsUseCase
 {
     private readonly IProductFilter _productFilter;
 
-    public SearchProductsUseCase(IProductFilter productFilter)
+    internal SearchProductsUseCase(IProductFilter productFilter)
     {
         _productFilter = productFilter;
     }

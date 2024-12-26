@@ -4,7 +4,7 @@ using Modular.Ecommerce.Core.Types;
 namespace Modular.Ecommerce.Catalog.Core.Repository;
 
 
-public interface IProductsWriter
+internal interface IProductsWriter
 {
     Task<Result<Unit>> AddProduct(Product product, CancellationToken cancellationToken = default);
     
