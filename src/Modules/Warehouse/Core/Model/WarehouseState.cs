@@ -83,4 +83,6 @@ public sealed class WarehouseState(ItemId itemId, ItemAvailability availability)
     public ItemId ItemId { get; init; } = itemId;
     public ItemAvailability Availability { get; init; } = availability;
     
+    public AvailableQuantity GetAvailableQuantity() => Availability.GetAvailableQuantity();
+    
 }

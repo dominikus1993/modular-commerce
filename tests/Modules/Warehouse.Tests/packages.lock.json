@@ -87,6 +87,15 @@
           "SharpZipLib": "1.4.2"
         }
       },
+      "Testcontainers.PostgreSql": {
+        "type": "Direct",
+        "requested": "[4.1.0, )",
+        "resolved": "4.1.0",
+        "contentHash": "7e9JH4m76/t4/MjmXgwt3fmfID80nY7MTo4UXHMisix3F3OoDmRC71absOshwxQQ/mCZNxR37HehgC51rt/YaA==",
+        "dependencies": {
+          "Testcontainers": "4.1.0"
+        }
+      },
       "Verify.Xunit": {
         "type": "Direct",
         "requested": "[28.7.0, )",

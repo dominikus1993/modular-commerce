@@ -6,18 +6,25 @@ namespace Warehouse.Infrastructure.Repository;
 
 public sealed class CurrentWarehouseStateReader : ICurrentWarehouseStateReader
 {
-    private readonly IQuerySession _querySession;
+    private readonly DocumentStore _store;
 
-    public CurrentWarehouseStateReader(IQuerySession querySession)
+    public CurrentWarehouseStateReader(DocumentStore store)
     {
-        this._querySession = querySession;
+        _store = store;
     }
 
     public async Task<CurrentWarehouseState?> GetWarehouseState(ItemId itemId, CancellationToken cancellationToken = default)
     {
-        var result = await _querySession.Query<CurrentWarehouseState>()
+        await using var session = _store.LightweightSession();
+        var result = await session.Query<WarehouseState>()
             .FirstOrDefaultAsync(x => x.ItemId == itemId, cancellationToken);
         
-        return result;
+        if (result is null)
+        {
+            return null;
+        }
+
+        var availableQuantity = result.GetAvailableQuantity();
+        return new CurrentWarehouseState(result.ItemId, availableQuantity);
     }
 }

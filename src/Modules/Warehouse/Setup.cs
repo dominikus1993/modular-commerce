@@ -43,8 +43,8 @@ public static class Setup
         options.Projections.Errors.SkipUnknownEvents = false;
         
         options.Projections.LiveStreamAggregation<WarehouseState>();
-        options.Projections.Add<CurrentWarehouseStateProjection>(ProjectionLifecycle.Inline);
-        
+        options.Projections.Add<WarehouseStateProjection>(ProjectionLifecycle.Inline);
+        options.Projections.Snapshot<WarehouseState>(SnapshotLifecycle.Inline);
         options.DisableNpgsqlLogging = true;
     }
 }
