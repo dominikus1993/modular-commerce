@@ -13,7 +13,7 @@ using Serilog.Sinks.SystemConsole.Themes;
 
 namespace Modular.Ecommerce.Core.Logging;
 
-public class SerilogOptions
+public sealed class SerilogOptions
 {
     internal static readonly Dictionary<string, string> DefaultOverride = new() { { "Microsoft.AspNetCore", "Warning" } };
     public bool ConsoleEnabled { get; set; } = true;
@@ -21,7 +21,7 @@ public class SerilogOptions
     public string Format { get; set; } = "compact";
     public Dictionary<string, string>? Override { get; set; } = DefaultOverride;
 
-    public LogEventLevel GetMinimumLogEventLevel()
+    internal LogEventLevel GetMinimumLogEventLevel()
     {
         if (!Enum.TryParse<LogEventLevel>(MinimumLevel, true, out var level))
         {
@@ -30,7 +30,7 @@ public class SerilogOptions
         return level;
     }
 
-    public static SerilogOptions Empty => new();
+    internal static SerilogOptions Empty => new();
 }
 
 
