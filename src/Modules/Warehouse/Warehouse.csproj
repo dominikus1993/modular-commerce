@@ -9,7 +9,7 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Api\" />
-      <Folder Include="Infrastructure\Repository\" />
+      <Folder Include="Infrastructure\Model\" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Marten.AspNetCore" />
@@ -17,5 +17,8 @@
     <ItemGroup>
       <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
-
+    
+    <ItemGroup>
+        <InternalsVisibleTo Include="Warehouse.Tests" />
+    </ItemGroup>
 </Project>
