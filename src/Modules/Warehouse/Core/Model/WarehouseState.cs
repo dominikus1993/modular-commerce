@@ -62,26 +62,65 @@ public sealed class ItemStateCreated
     public ItemWarehouseQuantity WarehouseQuantity { get; init; }
 }
 
+public abstract class AggregateBase
+{
+    // For indexing our event streams
+    public string Id { get; protected set; }
 
-public sealed class WarehouseState(ItemId itemId, ItemAvailability availability)
+    // For protecting the state, i.e. conflict prevention
+    // The setter is only public for setting up test conditions
+    public long Version { get; set; }
+
+    // JsonIgnore - for making sure that it won't be stored in inline projection
+    [JsonIgnore] 
+    private readonly List<object> _uncommittedEvents = new List<object>();
+
+    // Get the deltas, i.e. events that make up the state, not yet persisted
+    public IEnumerable<object> GetUncommittedEvents()
+    {
+        return _uncommittedEvents;
+    }
+
+    // Mark the deltas as persisted.
+    public void ClearUncommittedEvents()
+    {
+        _uncommittedEvents.Clear();
+    }
+
+    protected void AddUncommittedEvent(object @event)
+    {
+        // add the event to the uncommitted list
+        _uncommittedEvents.Add(@event);
+    }
+}
+
+
+public sealed class WarehouseState(ItemId id, ItemAvailability availability)
 {
     internal WarehouseState(ItemStateCreated request) : this(request.ItemId, new ItemAvailability(request.WarehouseQuantity, ItemSoldQuantity.Zero, ItemReservedQuantity.Zero))
     {
         
     }
-    public WarehouseState Apply(ItemReserved request)
+    
+    public static WarehouseState Create(ItemStateCreated created) => new WarehouseState(created);
+    
+    
+    
+    private WarehouseState Apply(ItemReserved request)
     {
-        if (ItemId != request.ItemId)
+        if (Id != request.ItemId)
         {
             throw new InvalidOperationException("Item id does not match");
         }
         
         var newSoldQ = Availability.SoldQuantity + request.SoldQuantity;
-        return new WarehouseState(ItemId, Availability with { SoldQuantity = newSoldQ });
+        return new WarehouseState(Id, Availability with { SoldQuantity = newSoldQ });
     }
 
-    public ItemId ItemId { get; init; } = itemId;
+    public ItemId Id { get; init; } = id;
     public ItemAvailability Availability { get; init; } = availability;
+    
+    public int Version { get; set; }
     
     public AvailableQuantity GetAvailableQuantity() => Availability.GetAvailableQuantity();
     

@@ -10,6 +10,7 @@
     <ItemGroup>
       <Folder Include="Api\" />
       <Folder Include="Infrastructure\Model\" />
+      <Folder Include="Infrastructure\Projections\" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Marten.AspNetCore" />

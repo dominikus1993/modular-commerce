@@ -17,7 +17,7 @@ public sealed class CurrentWarehouseStateReader : ICurrentWarehouseStateReader
     {
         await using var session = _store.LightweightSession();
         var result = await session.Query<WarehouseState>()
-            .FirstOrDefaultAsync(x => x.ItemId == itemId, cancellationToken);
+            .FirstOrDefaultAsync(x => x.Id == itemId, cancellationToken);
         
         if (result is null)
         {
@@ -25,6 +25,6 @@ public sealed class CurrentWarehouseStateReader : ICurrentWarehouseStateReader
         }
 
         var availableQuantity = result.GetAvailableQuantity();
-        return new CurrentWarehouseState(result.ItemId, availableQuantity);
+        return new CurrentWarehouseState(result.Id, availableQuantity);
     }
 }
