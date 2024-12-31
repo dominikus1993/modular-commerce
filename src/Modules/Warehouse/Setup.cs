@@ -6,7 +6,6 @@ using Marten.Events.Projections;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Warehouse.Core.Model;
-using Warehouse.Infrastructure.Projections;
 using Weasel.Core;
 
 namespace Warehouse;

@@ -10,13 +10,13 @@ public class WarehouseStateTests
         // Arrange
         var itemId = Guid.CreateVersion7();
         var warehouseState = new WarehouseState(itemId, new ItemAvailability(10, 0, 0));
-        var itemReserved = new ItemReserved { ItemId = itemId, SoldQuantity = 5 };
         
         // Act
-        var newState = warehouseState.Apply(itemReserved);
+        warehouseState.Reserve(new ItemSoldQuantity(5));
         
         // Assert
-        Assert.Equal(5, newState.Availability.SoldQuantity.Value);
+        Assert.Equal(5, warehouseState.Availability.SoldQuantity.Value);
+        Assert.NotEmpty(warehouseState.GetUncommittedEvents());
     }
     
     
@@ -25,13 +25,13 @@ public class WarehouseStateTests
     {
         // Arrange
         var itemId = Guid.CreateVersion7();
-        var warehouseState = new WarehouseState(new ItemStateCreated() { ItemId = itemId, WarehouseQuantity = new ItemWarehouseQuantity(10)});
-        var itemReserved = new ItemReserved { ItemId = itemId, SoldQuantity = 5 };
+        var warehouseState = new WarehouseState(itemId, new ItemAvailability(10, 0, 0));
         
         // Act
-        var newState = warehouseState.Apply(itemReserved);
+        warehouseState.Reserve(new ItemSoldQuantity(5));
         
         // Assert
-        Assert.Equal(5, newState.Availability.SoldQuantity.Value);
+        Assert.Equal(5, warehouseState.Availability.SoldQuantity.Value);
+        Assert.NotEmpty(warehouseState.GetUncommittedEvents());
     }
 }

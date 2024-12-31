@@ -60,12 +60,15 @@ public sealed class ItemStateCreated
 {
     public ItemId ItemId { get; init; }
     public ItemWarehouseQuantity WarehouseQuantity { get; init; }
+    public ItemSoldQuantity SoldQuantity { get; init; }
+    public ItemReservedQuantity ReservedQuantity { get; init; }
+    
 }
 
-public abstract class AggregateBase
+internal abstract class AggregateBase
 {
     // For indexing our event streams
-    public string Id { get; protected set; }
+    public Guid Id { get; protected set; }
 
     // For protecting the state, i.e. conflict prevention
     // The setter is only public for setting up test conditions
@@ -73,7 +76,7 @@ public abstract class AggregateBase
 
     // JsonIgnore - for making sure that it won't be stored in inline projection
     [JsonIgnore] 
-    private readonly List<object> _uncommittedEvents = new List<object>();
+    private readonly List<object> _uncommittedEvents = [];
 
     // Get the deltas, i.e. events that make up the state, not yet persisted
     public IEnumerable<object> GetUncommittedEvents()
@@ -89,24 +92,52 @@ public abstract class AggregateBase
 
     protected void AddUncommittedEvent(object @event)
     {
+        ArgumentNullException.ThrowIfNull(@event);
         // add the event to the uncommitted list
         _uncommittedEvents.Add(@event);
     }
 }
 
 
-public sealed class WarehouseState(ItemId id, ItemAvailability availability)
+internal sealed class WarehouseState : AggregateBase
 {
-    internal WarehouseState(ItemStateCreated request) : this(request.ItemId, new ItemAvailability(request.WarehouseQuantity, ItemSoldQuantity.Zero, ItemReservedQuantity.Zero))
+    private WarehouseState()
     {
         
     }
     
-    public static WarehouseState Create(ItemStateCreated created) => new WarehouseState(created);
+    public WarehouseState(ItemId id, ItemAvailability availability)
+    {
+        
+        var itemStateCreated = new ItemStateCreated
+        {
+            ItemId = id,
+            WarehouseQuantity = availability.WarehouseQuantity,
+        };
+        
+        AddUncommittedEvent(new ItemStateCreated
+        {
+            ItemId = id,
+            WarehouseQuantity = availability.WarehouseQuantity,
+        });
+        Apply(itemStateCreated);
+    }
     
+    public static WarehouseState Create(ItemStateCreated created) => new WarehouseState{ Availability = new ItemAvailability(created.WarehouseQuantity, created.SoldQuantity, created.ReservedQuantity), Id = created.ItemId };
+
+    public void Reserve(ItemSoldQuantity soldQuantity)
+    {
+        var itemReserved = new ItemReserved
+        {
+            ItemId = Id,
+            SoldQuantity = soldQuantity,
+        };
+        
+        AddUncommittedEvent(itemReserved);
+        Apply(itemReserved);
+    }
     
-    
-    private WarehouseState Apply(ItemReserved request)
+    private void Apply(ItemReserved request)
     {
         if (Id != request.ItemId)
         {
@@ -114,11 +145,18 @@ public sealed class WarehouseState(ItemId id, ItemAvailability availability)
         }
         
         var newSoldQ = Availability.SoldQuantity + request.SoldQuantity;
-        return new WarehouseState(Id, Availability with { SoldQuantity = newSoldQ });
+        Availability = Availability with { SoldQuantity = newSoldQ };
+        Version++;
     }
-
-    public ItemId Id { get; init; } = id;
-    public ItemAvailability Availability { get; init; } = availability;
+    
+    private void Apply(ItemStateCreated request)
+    {
+        Id = request.ItemId;
+        Availability = new ItemAvailability(request.WarehouseQuantity, request.SoldQuantity, request.ReservedQuantity);
+        Version++;
+    }
+    
+    public ItemAvailability Availability { get; private set; }
     
     public int Version { get; set; }
     

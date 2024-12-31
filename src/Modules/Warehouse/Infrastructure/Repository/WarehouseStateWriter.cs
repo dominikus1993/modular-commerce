@@ -5,7 +5,7 @@ using Warehouse.Core.Repository;
 
 namespace Warehouse.Infrastructure.Repository;
 
-public class WarehouseStateWriter : IWarehouseStateWriter
+internal class WarehouseStateWriter : IWarehouseStateWriter
 {
     private readonly DocumentStore _documentStore;
 
@@ -17,6 +17,11 @@ public class WarehouseStateWriter : IWarehouseStateWriter
 
     public Task<Result<Unit>> Add(WarehouseState state, CancellationToken cancellationToken = default)
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    public Task<Result<Unit>> Update(WarehouseState state, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
     }
 }

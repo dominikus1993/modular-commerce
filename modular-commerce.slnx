@@ -4,7 +4,6 @@
     <Project Path="src\App\Api\Api.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/src/Modules/">
-    <Project Path="Basket\Basket.csproj" Type="Classic C#" />
     <Project Path="src\Modules\Catalog\Catalog.csproj" Type="Classic C#" />
     <Project Path="src\Modules\Core\Core.csproj" Type="Classic C#" />
     <Project Path="src\Modules\Warehouse\Warehouse.csproj" Type="Classic C#" />

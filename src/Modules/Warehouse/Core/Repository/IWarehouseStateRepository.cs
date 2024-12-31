@@ -3,7 +3,7 @@ using Warehouse.Core.Model;
 
 namespace Warehouse.Core.Repository;
 
-public interface IWarehouseStateRepository
+internal interface IWarehouseStateRepository
 {
     Task<Result<Unit>> Save(WarehouseState state, CancellationToken cancellationToken = default);
 }
