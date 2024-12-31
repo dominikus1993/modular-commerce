@@ -15,9 +15,8 @@ public sealed class CurrentWarehouseStateReader : ICurrentWarehouseStateReader
 
     public async Task<CurrentWarehouseState?> GetWarehouseState(ItemId itemId, CancellationToken cancellationToken = default)
     {
-        await using var session = _store.LightweightSession();
-        var result = await session.Query<WarehouseState>()
-            .FirstOrDefaultAsync(x => x.Id == itemId, cancellationToken);
+        await using var session = await _store.LightweightSerializableSessionAsync(cancellationToken);
+        WarehouseState? result = await session.Events.FetchLatest<WarehouseState>(itemId, cancellationToken);
         
         if (result is null)
         {

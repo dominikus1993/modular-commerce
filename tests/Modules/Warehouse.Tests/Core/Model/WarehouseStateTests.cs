@@ -9,7 +9,7 @@ public class WarehouseStateTests
     {
         // Arrange
         var itemId = Guid.CreateVersion7();
-        var warehouseState = new WarehouseState(itemId, new ItemAvailability(10, 0, 0));
+        var warehouseState = new WarehouseState(itemId, 10);
         
         // Act
         warehouseState.Reserve(new ItemSoldQuantity(5));
@@ -25,13 +25,9 @@ public class WarehouseStateTests
     {
         // Arrange
         var itemId = Guid.CreateVersion7();
-        var warehouseState = new WarehouseState(itemId, new ItemAvailability(10, 0, 0));
-        
-        // Act
-        warehouseState.Reserve(new ItemSoldQuantity(5));
+        var warehouseState = new WarehouseState(itemId, 10);
         
         // Assert
-        Assert.Equal(5, warehouseState.Availability.SoldQuantity.Value);
         Assert.NotEmpty(warehouseState.GetUncommittedEvents());
     }
 }

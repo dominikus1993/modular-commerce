@@ -15,13 +15,27 @@ internal class WarehouseStateWriter : IWarehouseStateWriter
     }
 
 
-    public Task<Result<Unit>> Add(WarehouseState state, CancellationToken cancellationToken = default)
+    public async Task<Result<Unit>> AddOrUpdate(WarehouseState state, CancellationToken cancellationToken = default)
     {
-        throw new System.NotImplementedException();
+        var events = state.GetUncommittedEvents().ToArray();
+        
+        if (events.Length == 0)
+        {
+            return Result.UnitResult;
+        }
+        
+        await using var session = await _documentStore.LightweightSerializableSessionAsync(cancellationToken);
+        
+        foreach (var @event in events)
+        {
+            session.Events.Append(state.Id, @event);
+        }
+        
+        await session.SaveChangesAsync(cancellationToken);
+        
+        state.ClearUncommittedEvents();
+        
+        return Result.UnitResult;
     }
-
-    public Task<Result<Unit>> Update(WarehouseState state, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
+    
 }

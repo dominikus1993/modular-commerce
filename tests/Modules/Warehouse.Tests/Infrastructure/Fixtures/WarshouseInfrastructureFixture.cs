@@ -23,6 +23,11 @@ public sealed class WarshouseInfrastructureFixture : IAsyncLifetime
     {
         return new CurrentWarehouseStateReader(DocumentStore);
     }
+    
+    internal IWarehouseStateWriter CreateCurrentWarehouseStateWriter()
+    {
+        return new WarehouseStateWriter(DocumentStore);
+    }
 
     public async Task DisposeAsync()
     {

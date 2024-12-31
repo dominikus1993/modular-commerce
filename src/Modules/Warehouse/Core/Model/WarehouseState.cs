@@ -29,7 +29,7 @@ public readonly record struct ItemReservedQuantity(int Value)
     public static readonly ItemReservedQuantity Zero = new ItemReservedQuantity(0);
 }
 
-public readonly struct AvailableQuantity(uint Value)
+public readonly record struct AvailableQuantity(uint Value)
 {
     public static readonly AvailableQuantity Zero = new AvailableQuantity(0u);
 }
@@ -65,7 +65,7 @@ public sealed class ItemStateCreated
     
 }
 
-internal abstract class AggregateBase
+public abstract class AggregateBase
 {
     // For indexing our event streams
     public Guid Id { get; protected set; }
@@ -99,32 +99,29 @@ internal abstract class AggregateBase
 }
 
 
-internal sealed class WarehouseState : AggregateBase
+public sealed class WarehouseState : AggregateBase
 {
-    private WarehouseState()
+    public WarehouseState(ItemId id, ItemWarehouseQuantity warehouseQuantity)
     {
-        
-    }
-    
-    public WarehouseState(ItemId id, ItemAvailability availability)
-    {
-        
         var itemStateCreated = new ItemStateCreated
         {
             ItemId = id,
-            WarehouseQuantity = availability.WarehouseQuantity,
+            WarehouseQuantity = warehouseQuantity,
         };
         
-        AddUncommittedEvent(new ItemStateCreated
-        {
-            ItemId = id,
-            WarehouseQuantity = availability.WarehouseQuantity,
-        });
+        AddUncommittedEvent(itemStateCreated);
         Apply(itemStateCreated);
     }
     
-    public static WarehouseState Create(ItemStateCreated created) => new WarehouseState{ Availability = new ItemAvailability(created.WarehouseQuantity, created.SoldQuantity, created.ReservedQuantity), Id = created.ItemId };
-
+    [JsonConstructor]
+    public WarehouseState(ItemId id, ItemAvailability availability)
+    {
+        Id = id;
+        Availability = availability;
+    }
+    
+    public static WarehouseState Create(ItemStateCreated created) => new WarehouseState(created.ItemId, new ItemAvailability(created.WarehouseQuantity, created.SoldQuantity, created.ReservedQuantity));
+    
     public void Reserve(ItemSoldQuantity soldQuantity)
     {
         var itemReserved = new ItemReserved
@@ -157,8 +154,6 @@ internal sealed class WarehouseState : AggregateBase
     }
     
     public ItemAvailability Availability { get; private set; }
-    
-    public int Version { get; set; }
     
     public AvailableQuantity GetAvailableQuantity() => Availability.GetAvailableQuantity();
     
