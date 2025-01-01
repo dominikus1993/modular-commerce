@@ -45,7 +45,7 @@ public class CurrentWarehouseStateReaderTests : IClassFixture<WarshouseInfrastru
         // Assert
         
         Assert.NotNull(stateFromDb);
-        Assert.Equal(10u, stateFromDb.AvailableQuantity.Value);
+        Assert.Equal(10, stateFromDb.GetAvailableQuantity().Value);
     }
     
     [Fact]
@@ -70,7 +70,7 @@ public class CurrentWarehouseStateReaderTests : IClassFixture<WarshouseInfrastru
         // Assert
         
         Assert.NotNull(stateFromDb);
-        Assert.Equal(5u, stateFromDb.AvailableQuantity.Value);
+        Assert.Equal(5, stateFromDb.GetAvailableQuantity().Value);
     }
     
     

@@ -29,9 +29,9 @@ public readonly record struct ItemReservedQuantity(int Value)
     public static readonly ItemReservedQuantity Zero = new ItemReservedQuantity(0);
 }
 
-public readonly record struct AvailableQuantity(uint Value)
+public readonly record struct AvailableQuantity(int Value)
 {
-    public static readonly AvailableQuantity Zero = new AvailableQuantity(0u);
+    public static readonly AvailableQuantity Zero = new AvailableQuantity(0);
 }
 
 public sealed record ItemAvailability(
@@ -46,11 +46,11 @@ public sealed record ItemAvailability(
         {
             return AvailableQuantity.Zero;
         }
-        return new AvailableQuantity((uint)available);
+        return new AvailableQuantity(available);
     }
 }
 
-public sealed class ItemReserved
+public sealed class ItemSold
 {
     public ItemId ItemId { get; init; }
     public ItemSoldQuantity SoldQuantity { get; init; }
@@ -60,9 +60,6 @@ public sealed class ItemStateCreated
 {
     public ItemId ItemId { get; init; }
     public ItemWarehouseQuantity WarehouseQuantity { get; init; }
-    public ItemSoldQuantity SoldQuantity { get; init; }
-    public ItemReservedQuantity ReservedQuantity { get; init; }
-    
 }
 
 public abstract class AggregateBase
@@ -120,11 +117,11 @@ public sealed class WarehouseState : AggregateBase
         Availability = availability;
     }
     
-    public static WarehouseState Create(ItemStateCreated created) => new WarehouseState(created.ItemId, new ItemAvailability(created.WarehouseQuantity, created.SoldQuantity, created.ReservedQuantity));
+    public static WarehouseState Create(ItemStateCreated created) => new WarehouseState(created.ItemId, new ItemAvailability(created.WarehouseQuantity, 0, 0));
     
     public void Reserve(ItemSoldQuantity soldQuantity)
     {
-        var itemReserved = new ItemReserved
+        var itemReserved = new ItemSold
         {
             ItemId = Id,
             SoldQuantity = soldQuantity,
@@ -134,7 +131,7 @@ public sealed class WarehouseState : AggregateBase
         Apply(itemReserved);
     }
     
-    private void Apply(ItemReserved request)
+    private void Apply(ItemSold request)
     {
         if (Id != request.ItemId)
         {
@@ -149,7 +146,7 @@ public sealed class WarehouseState : AggregateBase
     private void Apply(ItemStateCreated request)
     {
         Id = request.ItemId;
-        Availability = new ItemAvailability(request.WarehouseQuantity, request.SoldQuantity, request.ReservedQuantity);
+        Availability = new ItemAvailability(request.WarehouseQuantity, 0, 0);
         Version++;
     }
     

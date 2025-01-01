@@ -6,6 +6,8 @@ using Marten.Events.Projections;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Warehouse.Core.Model;
+using Warehouse.Infrastructure.Projections;
+
 using Weasel.Core;
 
 namespace Warehouse;
@@ -41,6 +43,7 @@ public static class Setup
         options.Projections.Errors.SkipSerializationErrors = false;
         options.Projections.Errors.SkipUnknownEvents = false;
         
+        options.Projections.Add<CurrentWarehouseStateProjection>(ProjectionLifecycle.Inline);
         options.Projections.Snapshot<WarehouseState>(SnapshotLifecycle.Inline);
         options.DisableNpgsqlLogging = true;
     }
